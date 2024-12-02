@@ -1,0 +1,250 @@
+Token DEBUT trouvé
+Nouvelle ligne (2)
+Token MOINS trouvé
+Token MOINS trouvé
+Identifiant : D
+Token non reconnu : �
+Token non reconnu : �
+Token non reconnu : c
+Token non reconnu : l
+Token non reconnu : a
+Token non reconnu : r
+Token non reconnu : a
+Token non reconnu : t
+Token non reconnu : i
+Token non reconnu : o
+Token non reconnu : n
+Token non reconnu : d
+Token non reconnu : e
+Token non reconnu : s
+Token non reconnu : v
+Token non reconnu : a
+Token non reconnu : r
+Token non reconnu : i
+Token non reconnu : a
+Token non reconnu : b
+Token non reconnu : l
+Token non reconnu : e
+Token non reconnu : s
+Token DOUBLE_SHARP trouvé
+Nouvelle ligne (3)
+Token NUM trouvé
+Token DEUX_POINTS trouvé
+Token non reconnu : a
+Token non reconnu : g
+Token non reconnu : e
+Nouvelle ligne (4)
+Token REAL trouvé
+Token DEUX_POINTS trouvé
+Token non reconnu : s
+Token non reconnu : a
+Token non reconnu : l
+Token non reconnu : a
+Token non reconnu : i
+Token non reconnu : r
+Token non reconnu : e
+Nouvelle ligne (5)
+Token FIXE trouvé
+Token NUM trouvé
+Token DEUX_POINTS trouvé
+Identifiant : MAX_AGE
+Token ASSIGNATION trouvé
+Constante entière : 65
+Nouvelle ligne (6)
+Token EXECUTION trouvé
+Token ACCOLADE_OUVRANTE trouvé
+Nouvelle ligne (7)
+Token non reconnu : a
+Token non reconnu : f
+Token non reconnu : f
+Token non reconnu : i
+Token non reconnu : c
+Token non reconnu : h
+Token non reconnu : e
+Token PARENTHESE_OUVRANTE trouvé
+Token non reconnu : "
+Identifiant : Entrez
+Token non reconnu : v
+Token non reconnu : o
+Token non reconnu : t
+Token non reconnu : r
+Token non reconnu : e
+Token non reconnu : �
+Token non reconnu : �
+Token non reconnu : g
+Token non reconnu : e
+Token DEUX_POINTS trouvé
+Token non reconnu : "
+Token PARENTHESE_FERMANTE trouvé
+Nouvelle ligne (8)
+Token LIRE trouvé
+Token PARENTHESE_OUVRANTE trouvé
+Token non reconnu : a
+Token non reconnu : g
+Token non reconnu : e
+Token PARENTHESE_FERMANTE trouvé
+Nouvelle ligne (9)
+Token SI trouvé
+Token PARENTHESE_OUVRANTE trouvé
+Token non reconnu : a
+Token non reconnu : g
+Token non reconnu : e
+Token INFERIEUR trouvé
+Identifiant : MAX_AGE
+Token PARENTHESE_FERMANTE trouvé
+Token ALORS trouvé
+Token ACCOLADE_OUVRANTE trouvé
+Nouvelle ligne (10)
+Token non reconnu : a
+Token non reconnu : f
+Token non reconnu : f
+Token non reconnu : i
+Token non reconnu : c
+Token non reconnu : h
+Token non reconnu : e
+Token PARENTHESE_OUVRANTE trouvé
+Token non reconnu : "
+Identifiant : Vous
+Token non reconnu : p
+Token non reconnu : o
+Token non reconnu : u
+Token non reconnu : v
+Token non reconnu : e
+Token non reconnu : z
+Token non reconnu : e
+Token non reconnu : n
+Token non reconnu : c
+Token non reconnu : o
+Token non reconnu : r
+Token non reconnu : e
+Token non reconnu : t
+Token non reconnu : r
+Token non reconnu : a
+Token non reconnu : v
+Token non reconnu : a
+Token non reconnu : i
+Token non reconnu : l
+Token non reconnu : l
+Token non reconnu : e
+Token non reconnu : r
+Token non reconnu : .
+Token non reconnu : "
+Token PARENTHESE_FERMANTE trouvé
+Nouvelle ligne (11)
+Token ACCOLADE_FERMANTE trouvé
+Identifiant : SINON
+Token ACCOLADE_OUVRANTE trouvé
+Nouvelle ligne (12)
+Token non reconnu : a
+Token non reconnu : f
+Token non reconnu : f
+Token non reconnu : i
+Token non reconnu : c
+Token non reconnu : h
+Token non reconnu : e
+Token PARENTHESE_OUVRANTE trouvé
+Token non reconnu : "
+Identifiant : Vous
+Token non reconnu : �
+Token non reconnu : �
+Token non reconnu : t
+Token non reconnu : e
+Token non reconnu : s
+Token non reconnu : e
+Token non reconnu : n
+Token non reconnu : �
+Token non reconnu : �
+Token non reconnu : g
+Token non reconnu : e
+Token non reconnu : d
+Token non reconnu : e
+Token non reconnu : r
+Token non reconnu : e
+Token non reconnu : t
+Token non reconnu : r
+Token non reconnu : a
+Token non reconnu : i
+Token non reconnu : t
+Token non reconnu : e
+Token non reconnu : .
+Token non reconnu : "
+Token PARENTHESE_FERMANTE trouvé
+Nouvelle ligne (13)
+Token ACCOLADE_FERMANTE trouvé
+Nouvelle ligne (14)
+Token non reconnu : c
+Token non reconnu : o
+Token non reconnu : m
+Token non reconnu : p
+Token non reconnu : t
+Token non reconnu : e
+Token non reconnu : u
+Token non reconnu : r
+Token AFFECTATION trouvé
+Constante entière : 0
+Nouvelle ligne (15)
+Token TANTQUE trouvé
+Token PARENTHESE_OUVRANTE trouvé
+Token non reconnu : c
+Token non reconnu : o
+Token non reconnu : m
+Token non reconnu : p
+Token non reconnu : t
+Token non reconnu : e
+Token non reconnu : u
+Token non reconnu : r
+Token INFERIEUR trouvé
+Constante entière : 5
+Token PARENTHESE_FERMANTE trouvé
+Token FAIRE trouvé
+Token ACCOLADE_OUVRANTE trouvé
+Nouvelle ligne (16)
+Token non reconnu : a
+Token non reconnu : f
+Token non reconnu : f
+Token non reconnu : i
+Token non reconnu : c
+Token non reconnu : h
+Token non reconnu : e
+Token PARENTHESE_OUVRANTE trouvé
+Token non reconnu : "
+Identifiant : Compteur
+Token TANTQUE trouvé
+Token DEUX_POINTS trouvé
+Token non reconnu : "
+Token VIRGULE trouvé
+Token non reconnu : c
+Token non reconnu : o
+Token non reconnu : m
+Token non reconnu : p
+Token non reconnu : t
+Token non reconnu : e
+Token non reconnu : u
+Token non reconnu : r
+Token PARENTHESE_FERMANTE trouvé
+Nouvelle ligne (17)
+Token non reconnu : c
+Token non reconnu : o
+Token non reconnu : m
+Token non reconnu : p
+Token non reconnu : t
+Token non reconnu : e
+Token non reconnu : u
+Token non reconnu : r
+Token AFFECTATION trouvé
+Token non reconnu : c
+Token non reconnu : o
+Token non reconnu : m
+Token non reconnu : p
+Token non reconnu : t
+Token non reconnu : e
+Token non reconnu : u
+Token non reconnu : r
+Token PLUS trouvé
+Constante entière : 1
+Nouvelle ligne (18)
+Token ACCOLADE_FERMANTE trouvé
+Nouvelle ligne (19)
+Token ACCOLADE_FERMANTE trouvé
+Nouvelle ligne (20)
+Token FIN trouvé
