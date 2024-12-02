@@ -38,12 +38,14 @@
 #define PARENTHESE_FERMANTE 
 #define CROCHET_OUVRANT 
 #define CROCHET_FERMANT 
+#define GUILLEMENT 
 #define ACCOLADE_OUVRANTE 
 #define ACCOLADE_FERMANTE 
 #define ID 
 #define CST
 #define DOUBLE_SHARP
 #define STRING
+#define POINT
  
  
 #endif

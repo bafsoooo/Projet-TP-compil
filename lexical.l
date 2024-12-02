@@ -22,8 +22,7 @@ int nb_ligne = 1;
 "FIXE"                     { printf("Token FIXE trouvé\n"); return FIXE; }
 "afficher"                 { printf("Token AFFICHE trouvé\n"); return AFFICHE; }
 "lire"                     { printf("Token LIRE trouvé\n"); return LIRE; }
-
-[A-Z][A-Za-z0-9_]{0,9}    { printf("Identifiant : %s\n", yytext); return ID; }
+[a-zA-Z][A-Za-z0-9_éèêàùçàôâîù]{0,9}  { printf("Identifiant : %s\n", yytext); return ID; }
 [0-9]+                     { printf("Constante entière : %s\n", yytext); return CST; }
 "=="                       { printf("Token EGAL trouvé\n"); return EGAL; }
 "!="                       { printf("Token DIFFERENT trouvé\n"); return DIFFERENT; }
@@ -40,15 +39,17 @@ int nb_ligne = 1;
 ";"                        { printf("Token POINT_VIRGULE trouvé\n"); return POINT_VIRGULE; }
 ":"                        { printf("Token DEUX_POINTS trouvé\n"); return DEUX_POINTS; }
 ","                        { printf("Token VIRGULE trouvé\n"); return VIRGULE; }
+"."                        { printf("Token POINT trouvé\n"); return POINT; }
 "("                        { printf("Token PARENTHESE_OUVRANTE trouvé\n"); return PARENTHESE_OUVRANTE; }
 ")"                        { printf("Token PARENTHESE_FERMANTE trouvé\n"); return PARENTHESE_FERMANTE; }
 "["                        { printf("Token CROCHET_OUVRANT trouvé\n"); return CROCHET_OUVRANT; }
 "]"                        { printf("Token CROCHET_FERMANT trouvé\n"); return CROCHET_FERMANT; }
 "{"                        { printf("Token ACCOLADE_OUVRANTE trouvé\n"); return ACCOLADE_OUVRANTE; }
 "}"                        { printf("Token ACCOLADE_FERMANTE trouvé\n"); return ACCOLADE_FERMANTE; }
+"\""                       { printf("Token GUILLEMENT trouvé\n"); return GUILLEMENT; }
 "##"                       { printf("Token DOUBLE_SHARP trouvé\n"); return DOUBLE_SHARP; }
 "\"([^\"\\]|\\.)*\""       { printf("Chaîne de caractères : %s\n", yytext); return STRING; }
-"--[^\n]*##"               { printf("Commentaire sur une seule ligne ignoré\n"); }
+"--"([^#\n]*|#[^#])*"##"   { printf("Commentaire sur une seule ligne ignoré\n"); }
 "{-([^{}]*|{[^-]*)*-}"     { printf("Commentaire multi-ligne ignoré\n"); }
 
 [ \t\r]+                   { /* Ignorer les espaces et tabulations */ }
