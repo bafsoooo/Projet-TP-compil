@@ -1,117 +1,132 @@
-Token DEBUT trouvé
-Nouvelle ligne (2)
-Commentaire sur une seule ligne ignoré
+Token DEBUT trouv├®
 Nouvelle ligne (3)
-Token NUM trouvé
-Token DEUX_POINTS trouvé
-Identifiant : age
+--Déclaration des variables ##
+Commentaire sur une seule ligne ignor├®
 Nouvelle ligne (4)
-Token REAL trouvé
-Token DEUX_POINTS trouvé
-Identifiant : salaire
+NUM : age
+Token NUM trouv├®
+Token DEUX_POINTS trouv├®
+Identifiant : age
 Nouvelle ligne (5)
-Token FIXE trouvé
-Token NUM trouvé
-Token DEUX_POINTS trouvé
-Identifiant : MAX_AGE
-Token ASSIGNATION trouvé
-Constante entière : 65
+REAL : salaire
+Token REAL trouv├®
+Token DEUX_POINTS trouv├®
+Identifiant : salaire
 Nouvelle ligne (6)
-Token EXECUTION trouvé
-Token ACCOLADE_OUVRANTE trouvé
+FIXE NUM : MAX_AGE = 65
+Token FIXE trouv├®
+Token NUM trouv├®
+Token DEUX_POINTS trouv├®
+Identifiant : MAX_AGE
+Token ASSIGNATION trouv├®
+Constante enti├¿re : 65
 Nouvelle ligne (7)
+EXECUTION {
+Token EXECUTION trouv├®
+Token ACCOLADE_OUVRANTE trouv├®
+Nouvelle ligne (8)
+affiche("Entrez votre âge :")
 Identifiant : affiche
-Token PARENTHESE_OUVRANTE trouvé
-Token GUILLEMENT trouvé
+Token PARENTHESE_OUVRANTE trouv├®
+Token GUILLEMENT trouv├®
 Identifiant : Entrez
 Identifiant : votre
-Token non reconnu : �
-Token non reconnu : �
+Token non reconnu : â
 Identifiant : ge
-Token DEUX_POINTS trouvé
-Token GUILLEMENT trouvé
-Token PARENTHESE_FERMANTE trouvé
-Nouvelle ligne (8)
-Token LIRE trouvé
-Token PARENTHESE_OUVRANTE trouvé
-Identifiant : age
-Token PARENTHESE_FERMANTE trouvé
+Token DEUX_POINTS trouv├®
+Token GUILLEMENT trouv├®
+Token PARENTHESE_FERMANTE trouv├®
 Nouvelle ligne (9)
-Token SI trouvé
-Token PARENTHESE_OUVRANTE trouvé
+lire(age)
+Token LIRE trouv├®
+Token PARENTHESE_OUVRANTE trouv├®
 Identifiant : age
-Token INFERIEUR trouvé
-Identifiant : MAX_AGE
-Token PARENTHESE_FERMANTE trouvé
-Token ALORS trouvé
-Token ACCOLADE_OUVRANTE trouvé
+Token PARENTHESE_FERMANTE trouv├®
 Nouvelle ligne (10)
+SI (age < MAX_AGE) ALORS {
+Token SI trouv├®
+Token PARENTHESE_OUVRANTE trouv├®
+Identifiant : age
+Token INFERIEUR trouv├®
+Identifiant : MAX_AGE
+Token PARENTHESE_FERMANTE trouv├®
+Token ALORS trouv├®
+Token ACCOLADE_OUVRANTE trouv├®
+Nouvelle ligne (11)
+affiche("Vous pouvez encore travailler.")
 Identifiant : affiche
-Token PARENTHESE_OUVRANTE trouvé
-Token GUILLEMENT trouvé
+Token PARENTHESE_OUVRANTE trouv├®
+Token GUILLEMENT trouv├®
 Identifiant : Vous
 Identifiant : pouvez
 Identifiant : encore
 Identifiant : travailler
-Token POINT trouvé
-Token GUILLEMENT trouvé
-Token PARENTHESE_FERMANTE trouvé
-Nouvelle ligne (11)
-Token ACCOLADE_FERMANTE trouvé
-Identifiant : SINON
-Token ACCOLADE_OUVRANTE trouvé
+Token POINT trouv├®
+Token GUILLEMENT trouv├®
+Token PARENTHESE_FERMANTE trouv├®
 Nouvelle ligne (12)
+} SINON {
+Token ACCOLADE_FERMANTE trouv├®
+Identifiant : SINON
+Token ACCOLADE_OUVRANTE trouv├®
+Nouvelle ligne (13)
+affiche("Vous êtes en âge de retraite.")
 Identifiant : affiche
-Token PARENTHESE_OUVRANTE trouvé
-Token GUILLEMENT trouvé
+Token PARENTHESE_OUVRANTE trouv├®
+Token GUILLEMENT trouv├®
 Identifiant : Vous
-Token non reconnu : �
-Token non reconnu : �
+Token non reconnu : ê
 Identifiant : tes
 Identifiant : en
-Token non reconnu : �
-Token non reconnu : �
+Token non reconnu : â
 Identifiant : ge
 Identifiant : de
 Identifiant : retraite
-Token POINT trouvé
-Token GUILLEMENT trouvé
-Token PARENTHESE_FERMANTE trouvé
-Nouvelle ligne (13)
-Token ACCOLADE_FERMANTE trouvé
+Token POINT trouv├®
+Token GUILLEMENT trouv├®
+Token PARENTHESE_FERMANTE trouv├®
 Nouvelle ligne (14)
-Identifiant : compteur
-Token AFFECTATION trouvé
-Constante entière : 0
+}
+Token ACCOLADE_FERMANTE trouv├®
 Nouvelle ligne (15)
-Token TANTQUE trouvé
-Token PARENTHESE_OUVRANTE trouvé
+compteur <- 0
 Identifiant : compteur
-Token INFERIEUR trouvé
-Constante entière : 5
-Token PARENTHESE_FERMANTE trouvé
-Token FAIRE trouvé
-Token ACCOLADE_OUVRANTE trouvé
+Token AFFECTATION trouv├®
+Constante enti├¿re : 0
 Nouvelle ligne (16)
-Identifiant : affiche
-Token PARENTHESE_OUVRANTE trouvé
-Token GUILLEMENT trouvé
-Identifiant : Compteur
-Token TANTQUE trouvé
-Token DEUX_POINTS trouvé
-Token GUILLEMENT trouvé
-Token VIRGULE trouvé
+TANTQUE (compteur < 5) FAIRE {
+Token TANTQUE trouv├®
+Token PARENTHESE_OUVRANTE trouv├®
 Identifiant : compteur
-Token PARENTHESE_FERMANTE trouvé
+Token INFERIEUR trouv├®
+Constante enti├¿re : 5
+Token PARENTHESE_FERMANTE trouv├®
+Token FAIRE trouv├®
+Token ACCOLADE_OUVRANTE trouv├®
 Nouvelle ligne (17)
+affiche("Compteur TANTQUE : ", compteur)
+Identifiant : affiche
+Token PARENTHESE_OUVRANTE trouv├®
+Token GUILLEMENT trouv├®
+Identifiant : Compteur
+Token TANTQUE trouv├®
+Token DEUX_POINTS trouv├®
+Token GUILLEMENT trouv├®
+Token VIRGULE trouv├®
 Identifiant : compteur
-Token AFFECTATION trouvé
-Identifiant : compteur
-Token PLUS trouvé
-Constante entière : 1
+Token PARENTHESE_FERMANTE trouv├®
 Nouvelle ligne (18)
-Token ACCOLADE_FERMANTE trouvé
+compteur <- compteur + 1
+Identifiant : compteur
+Token AFFECTATION trouv├®
+Identifiant : compteur
+Token PLUS trouv├®
+Constante enti├¿re : 1
 Nouvelle ligne (19)
-Token ACCOLADE_FERMANTE trouvé
+}
+Token ACCOLADE_FERMANTE trouv├®
 Nouvelle ligne (20)
-Token FIN trouvé
+}
+Token ACCOLADE_FERMANTE trouv├®
+Nouvelle ligne (21)
+FIN

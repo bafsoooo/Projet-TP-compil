@@ -46,6 +46,14 @@
 #define DOUBLE_SHARP
 #define STRING
 #define POINT
- 
- 
+//caractere specieux
+#define E_ACUTE 
+#define E_GRAVE 
+#define E_CIRCUMFLEX 
+#define A_GRAVE 
+#define U_GRAVE 
+#define C_CEDILLA 
+#define O_CIRCUMFLEX 
+#define A_CIRCUMFLEX 
+#define I_CIRCUMFLEX 
 #endif
