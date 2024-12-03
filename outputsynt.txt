@@ -1,0 +1,4 @@
+Token DEBUT trouvé
+Token EXECUTION trouvé
+Token FIN trouvé
+Programme syntaxiquement correct.

@@ -1,5 +1,5 @@
 %{
-#include "syntax.tab.h"
+#include "syntaxique.tab.h"
 #include <stdio.h>
 int nb_ligne = 1;
 %}
@@ -67,14 +67,3 @@ int nb_ligne = 1;
 
 
 %%
-
-int yywrap() {
-    return 1;  // Indiquer que la lecture du fichier est terminée
-}
-int main(){
-int token;
-    while ((token = yylex()) != 0) { // Continuer jusqu'à la fin du fichier
-        // yylex() retourne 0 à la fin de l'entrée
-    }
-    return 0;
-}

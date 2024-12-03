@@ -470,7 +470,7 @@ char *yytext;
 #line 1 "lexical.l"
 #define INITIAL 0
 #line 2 "lexical.l"
-#include "syntax.tab.h"
+#include "syntaxique.tab.h"
 #include <stdio.h>
 int nb_ligne = 1;
 #line 477 "lex.yy.c"
@@ -1887,15 +1887,3 @@ int main()
 	}
 #endif
 #line 69 "lexical.l"
-
-
-int yywrap() {
-    return 1;  // Indiquer que la lecture du fichier est terminée
-}
-int main(){
-int token;
-    while ((token = yylex()) != 0) { // Continuer jusqu'à la fin du fichier
-        // yylex() retourne 0 à la fin de l'entrée
-    }
-    return 0;
-}
