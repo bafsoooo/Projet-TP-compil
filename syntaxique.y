@@ -7,15 +7,42 @@
 %token ID CST STRING ET_LOGIQUE OU_LOGIQUE NEGATION FIXE AFFICHE LIRE EGAL DIFFERENT ASSIGNATION SUPERIEUR SUP_EGAL INFERIEUR INF_EGAL AFFECTATION PLUS MOINS FOIS DIVISER POINT_VIRGULE DEUX_POINTS VIRGULE POINT PARENTHESE_OUVRANTE PARENTHESE_FERMANTE CROCHET_OUVRANT CROCHET_FERMANT ACCOLADE_OUVRANTE ACCOLADE_FERMANTE
 %token GUILLEMENT DOUBLE_SHARP
 %token E_ACUTE E_GRAVE E_CIRCUMFLEX A_GRAVE U_GRAVE C_CEDILLA O_CIRCUMFLEX A_CIRCUMFLEX I_CIRCUMFLEX
+%token COMMENT_SINGLE COMMENT_MULTI
 
 %start program
 
 %%
 
 program:
-    DEBUT EXECUTION FIN {
+    DEBUT declarations EXECUTION block FIN {
         printf("Programme syntaxiquement correct.\n");
     }
+    ;
+
+declarations:
+    /* Liste de déclarations de variables */
+    | declarations declaration
+    | /* vide */
+    ;
+
+declaration:
+    type ID POINT_VIRGULE
+    ;
+
+type:
+    NUM
+    | REAL
+    | TEXT
+    ;
+
+block:
+    ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
+    ;
+
+instructions:
+    /* Liste d'instructions */
+    | COMMENT_SINGLE
+    | COMMENT_MULTI
     ;
 
 %%
