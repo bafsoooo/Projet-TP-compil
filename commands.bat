@@ -1,4 +1,4 @@
 flex lexical.l
-bison -d syntax.y
-gcc lex.yy.c syntax.tab.c -lfl -ly -o compiler
-compiler.exe<test1.txt >outputsynt.txt
+bison -d syntaxique.y
+gcc lex.yy.c syntaxique.tab.c -lfl -ly -o compiler
+compiler.exe<test2.txt >outputsynt.txt

@@ -22,7 +22,7 @@ int nb_ligne = 1;
 "FIXE"                     { printf("Token FIXE trouvé\n"); return FIXE; }
 "afficher"                 { printf("Token AFFICHE trouvé\n"); return AFFICHE; }
 "lire"                     { printf("Token LIRE trouvé\n"); return LIRE; }
-[A-Z][A-Za-z0-9_éèêàùçàôâîù]{0,9}  { printf("Identifiant : %s\n", yytext); return ID; }
+[A-Za-z][A-Za-z0-9_éèêàùçàôâîù]{0,9}  { printf("Identifiant : %s\n", yytext); return ID; }
 [0-9]+                     { printf("Constante entière : %s\n", yytext); return CST; }
 "=="                       { printf("Token EGAL trouvé\n"); return EGAL; }
 "!="                       { printf("Token DIFFERENT trouvé\n"); return DIFFERENT; }
@@ -32,10 +32,10 @@ int nb_ligne = 1;
 "<"                        { printf("Token INFERIEUR trouvé\n"); return INFERIEUR; }
 "<="                       { printf("Token INF_EGAL trouvé\n"); return INF_EGAL; }
 "<-"                       { printf("Token AFFECTATION trouvé\n"); return AFFECTATION; }
-"+"                        { printf("Token PLUS trouvé\n"); return PLUS; }
-"-"                        { printf("Token MOINS trouvé\n"); return MOINS; }
-"*"                        { printf("Token FOIS trouvé\n"); return FOIS; }
-"/"                        { printf("Token DIVISER trouvé\n"); return DIVISER; }
+"+"                        { printf("Token OPERATEUR + trouvé\n"); return PLUS; }
+"-"                        { printf("Token OPERATEUR - trouvé\n"); return MOINS; }
+"*"                        { printf("Token OPERATEUR * trouvé\n"); return MUL; }
+"/"                        { printf("Token OPERATEUR / trouvé\n"); return DIV; }
 ";"                        { printf("Token POINT_VIRGULE trouvé\n"); return POINT_VIRGULE; }
 ":"                        { printf("Token DEUX_POINTS trouvé\n"); return DEUX_POINTS; }
 ","                        { printf("Token VIRGULE trouvé\n"); return VIRGULE; }
@@ -48,18 +48,10 @@ int nb_ligne = 1;
 "}"                        { printf("Token ACCOLADE_FERMANTE trouvé\n"); return ACCOLADE_FERMANTE; }
 "\""                       { printf("Token GUILLEMENT trouvé\n"); return GUILLEMENT; }
 "##"                       { printf("Token DOUBLE_SHARP trouvé\n"); return DOUBLE_SHARP; }
-"é"                        { printf("Token E_ACUTE trouvé\n"); return E_ACUTE; }
-"è"                        { printf("Token E_GRAVE trouvé\n"); return E_GRAVE; }
-"ê"                        { printf("Token E_CIRCUMFLEX trouvé\n"); return E_CIRCUMFLEX; }
-"à"                        { printf("Token A_GRAVE trouvé\n"); return A_GRAVE; }
-"ù"                        { printf("Token U_GRAVE trouvé\n"); return U_GRAVE; }
-"ç"                        { printf("Token C_CEDILLA trouvé\n"); return C_CEDILLA; }
-"ô"                        { printf("Token O_CIRCUMFLEX trouvé\n"); return O_CIRCUMFLEX; }
-"â"                        { printf("Token A_CIRCUMFLEX trouvé\n"); return A_CIRCUMFLEX; }
-"î"                        { printf("Token I_CIRCUMFLEX trouvé\n"); return I_CIRCUMFLEX; }
 "\"([^\"\\]|\\.)*\""       { printf("Chaîne de caractères : %s\n", yytext); return STRING; }
-"--"([^#\n]*|#[^#])*"##"   { printf("Commentaire sur une seule ligne ignoré\n"); }
-"{-([^{}]*|{[^-]*)*-}"     { printf("Commentaire multi-ligne ignoré\n"); }
+"--"([^#\n]*|#[^#])*"##"   { printf("Commentaire sur une seule ligne ignoré\n"); return COMMENT_SINGLE; }
+"{-([^{}]*|{[^}]*})*-}"     { printf("Commentaire multi-ligne ignoré\n"); return COMMENT_MULTI; }
+
 
 [ \t\r]+                   { /* Ignorer les espaces et tabulations */ }
 \n                         { nb_ligne++; printf("Nouvelle ligne (%d)\n", nb_ligne); }

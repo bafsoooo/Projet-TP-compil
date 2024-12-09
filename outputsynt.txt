@@ -1,4 +1,39 @@
 Token DEBUT trouvé
+Nouvelle ligne (2)
+Token FIXE trouvé
+Token NUM trouvé
+Token DEUX_POINTS trouvé
+Identifiant : MAX_VALEUR
+Token ASSIGNATION trouvé
+Constante entière : 100
+Token POINT_VIRGULE trouvé
+Nouvelle ligne (3)
+Token NUM trouvé
+Token DEUX_POINTS trouvé
+Identifiant : scores
+Token CROCHET_OUVRANT trouvé
+Constante entière : 10
+Token CROCHET_FERMANT trouvé
+Token POINT_VIRGULE trouvé
+Nouvelle ligne (4)
+Token REAL trouvé
+Token DEUX_POINTS trouvé
+Identifiant : Salaire
+Token POINT_VIRGULE trouvé
+Nouvelle ligne (5)
+Token NUM trouvé
+Token DEUX_POINTS trouvé
+Identifiant : age
+Token POINT_VIRGULE trouvé
+Nouvelle ligne (6)
+Token TEXT trouvé
+Token DEUX_POINTS trouvé
+Identifiant : nom
+Token POINT_VIRGULE trouvé
+Nouvelle ligne (7)
 Token EXECUTION trouvé
-Token FIN trouvé
-Programme syntaxiquement correct.
+Token ACCOLADE_OUVRANTE trouvé
+Nouvelle ligne (8)
+Commentaire sur une seule ligne ignoré
+Nouvelle ligne (9)
+Identifiant : A

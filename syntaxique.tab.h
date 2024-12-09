@@ -69,8 +69,8 @@
      AFFECTATION = 285,
      PLUS = 286,
      MOINS = 287,
-     FOIS = 288,
-     DIVISER = 289,
+     MUL = 288,
+     DIV = 289,
      POINT_VIRGULE = 290,
      DEUX_POINTS = 291,
      VIRGULE = 292,
@@ -83,15 +83,8 @@
      ACCOLADE_FERMANTE = 299,
      GUILLEMENT = 300,
      DOUBLE_SHARP = 301,
-     E_ACUTE = 302,
-     E_GRAVE = 303,
-     E_CIRCUMFLEX = 304,
-     A_GRAVE = 305,
-     U_GRAVE = 306,
-     C_CEDILLA = 307,
-     O_CIRCUMFLEX = 308,
-     A_CIRCUMFLEX = 309,
-     I_CIRCUMFLEX = 310
+     COMMENT_SINGLE = 302,
+     COMMENT_MULTI = 303
    };
 #endif
 
