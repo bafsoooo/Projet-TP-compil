@@ -9,6 +9,10 @@ ASSIGNATION SUPERIEUR SUP_EGAL INFERIEUR INF_EGAL AFFECTATION PLUS MOINS MUL DIV
  DEUX_POINTS VIRGULE POINT PARENTHESE_OUVRANTE PARENTHESE_FERMANTE CROCHET_OUVRANT 
  CROCHET_FERMANT ACCOLADE_OUVRANTE ACCOLADE_FERMANTE
 %token GUILLEMENT DOUBLE_SHARP
+<<<<<<< HEAD
+=======
+%token E_ACUTE E_GRAVE E_CIRCUMFLEX A_GRAVE U_GRAVE C_CEDILLA O_CIRCUMFLEX A_CIRCUMFLEX I_CIRCUMFLEX
+>>>>>>> a382003054059738377d2ab761e849a761abd61f
 %token COMMENT_SINGLE COMMENT_MULTI
 
  
@@ -23,6 +27,7 @@ program:
     ;
 
 declarations:
+<<<<<<< HEAD
     declaration
     | declarations declaration
     ;
@@ -31,6 +36,15 @@ declaration:
     type DEUX_POINTS ID POINT_VIRGULE
     | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE
     | FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE 
+=======
+    /* Liste de déclarations de variables */
+    | declarations declaration
+    | /* vide */
+    ;
+
+declaration:
+    type ID POINT_VIRGULE
+>>>>>>> a382003054059738377d2ab761e849a761abd61f
     ;
 
 type:
@@ -38,7 +52,11 @@ type:
     | REAL
     | TEXT
     ;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> a382003054059738377d2ab761e849a761abd61f
 block:
     ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
     ;
@@ -47,6 +65,7 @@ instructions:
     /* Liste d'instructions */
     | COMMENT_SINGLE
     | COMMENT_MULTI
+<<<<<<< HEAD
     | affectation
     ;
 
@@ -83,6 +102,10 @@ OPERATEUR :
    | DIV
    ;
 
+=======
+    ;
+
+>>>>>>> a382003054059738377d2ab761e849a761abd61f
 %%
 
 int main() {
