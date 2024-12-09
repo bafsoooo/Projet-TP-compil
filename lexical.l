@@ -1,6 +1,7 @@
 %{
 #include "syntaxique.tab.h"
 #include <stdio.h>
+extern YYSTYPE yylval;
 int nb_ligne = 1;
 %}
 
@@ -14,6 +15,7 @@ int nb_ligne = 1;
 "TEXT"                     { printf("Token TEXT trouvé\n"); return TEXT; }
 "SI"                       { printf("Token SI trouvé\n"); return SI; }
 "ALORS"                    { printf("Token ALORS trouvé\n"); return ALORS; }
+"SINON"                    { printf("Token SINON trouvé\n"); return SINON; }
 "TANTQUE"                  { printf("Token TANTQUE trouvé\n"); return TANTQUE; }
 "FAIRE"                    { printf("Token FAIRE trouvé\n"); return FAIRE; }
 "ET"                       { printf("Token ET_LOGIQUE trouvé\n"); return ET_LOGIQUE; }

@@ -3,13 +3,19 @@
 #include "syntaxique.tab.h"  // Inclure les tokens définis
 %}
 
-%token DEBUT EXECUTION FIN NUM REAL SI ALORS TEXT ELSE TANTQUE FAIRE
+%token DEBUT EXECUTION FIN NUM REAL SI ALORS TEXT SINON TANTQUE FAIRE
 %token ID CST STRING ET_LOGIQUE OU_LOGIQUE NEGATION FIXE AFFICHE LIRE EGAL DIFFERENT 
-ASSIGNATION SUPERIEUR SUP_EGAL INFERIEUR INF_EGAL AFFECTATION PLUS MOINS MUL DIV POINT_VIRGULE
- DEUX_POINTS VIRGULE POINT PARENTHESE_OUVRANTE PARENTHESE_FERMANTE CROCHET_OUVRANT 
- CROCHET_FERMANT ACCOLADE_OUVRANTE ACCOLADE_FERMANTE
+%token ASSIGNATION SUPERIEUR SUP_EGAL INFERIEUR INF_EGAL AFFECTATION PLUS MOINS MUL DIV POINT_VIRGULE
+%token DEUX_POINTS VIRGULE POINT PARENTHESE_OUVRANTE PARENTHESE_FERMANTE CROCHET_OUVRANT 
+%token CROCHET_FERMANT ACCOLADE_OUVRANTE ACCOLADE_FERMANTE
 %token GUILLEMENT DOUBLE_SHARP
 %token COMMENT_SINGLE COMMENT_MULTI
+
+%union {
+    int entier;
+    char* str;    
+}
+
 
  
 %start program
@@ -23,24 +29,15 @@ program:
     ;
 
 declarations:
-<<<<<<< HEAD
     declaration
     | declarations declaration
+    | /* vide */
     ;
 
 declaration:
     type DEUX_POINTS ID POINT_VIRGULE
     | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE
     | FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE 
-=======
-    /* Liste de déclarations de variables */
-    | declarations declaration
-    | /* vide */
-    ;
-
-declaration:
-    type ID POINT_VIRGULE
->>>>>>> a382003054059738377d2ab761e849a761abd61f
     ;
 
 type:
@@ -48,11 +45,7 @@ type:
     | REAL
     | TEXT
     ;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> a382003054059738377d2ab761e849a761abd61f
 block:
     ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
     ;
@@ -61,28 +54,32 @@ instructions:
     /* Liste d'instructions */
     | COMMENT_SINGLE
     | COMMENT_MULTI
-<<<<<<< HEAD
     | affectation
+    | instSI
+    | instTantQue
+    | affiche
+    | lire
     ;
 
 affectation:
-    ID AFFECTATION expression POINT_VIRGULE
-    | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression POINT_VIRGULE
-    ;
+    ID AFFECTATION expression POINT_VIRGULE;
 
-expression:
+variables:
     CST
     | ID
-    | expression OPERATEUR expression
+
+expression:
+    variables
+    | expression operateur expression
     | expression ET_LOGIQUE expression
     | expression OU_LOGIQUE expression
     | NEGATION expression
-    | expression COMPARAISON expression
+    | expression comparaison expression
     | PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE
     | ID CROCHET_OUVRANT expression CROCHET_FERMANT  /* Accès à un tableau */
     ;
 
-COMPARAISON:
+comparaison:
     EGAL
     | DIFFERENT
     | SUPERIEUR
@@ -91,17 +88,27 @@ COMPARAISON:
     | INF_EGAL
     ;
 
-OPERATEUR :
+operateur :
    PLUS 
    | MOINS
    | MUL 
    | DIV
    ;
 
-=======
-    ;
 
->>>>>>> a382003054059738377d2ab761e849a761abd61f
+instSI :
+    SI PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE ALORS ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
+    | SI PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE ALORS ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE SINON ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE  
+    
+
+instTantQue :
+    TANTQUE PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE FAIRE ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
+
+affiche :
+    AFFICHE PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE
+
+lire:
+    LIRE PARENTHESE_OUVRANTE variables  PARENTHESE_FERMANTE
 %%
 
 int main() {

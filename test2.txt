@@ -7,7 +7,7 @@ DEBUT
 EXECUTION {
     -- Ceci est un commentaire sur une seule ligne ##
     A <- 2 ;
-    A <- H+D ;
-    Tab[1] <- a+b/4 
+    A <- H + D ;
+    Tab[1] <- a + b / 4 ;
 }
 FIN
