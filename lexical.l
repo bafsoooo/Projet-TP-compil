@@ -14,6 +14,7 @@ int nb_ligne = 1;
 "REAL"                     { printf("Token REAL trouvé\n"); return REAL; }
 "TEXT"                     { printf("Token TEXT trouvé\n"); return TEXT; }
 "SI"                       { printf("Token SI trouvé\n"); return SI; }
+"SINON"                    { printf("Token SINON trouvé\n"); return SINON; }
 "ALORS"                    { printf("Token ALORS trouvé\n"); return ALORS; }
 "SINON"                    { printf("Token SINON trouvé\n"); return SINON; }
 "TANTQUE"                  { printf("Token TANTQUE trouvé\n"); return TANTQUE; }
@@ -22,7 +23,7 @@ int nb_ligne = 1;
 "OU"                       { printf("Token OU_LOGIQUE trouvé\n"); return OU_LOGIQUE; }
 "NON"                      { printf("Token NEGATION trouvé\n"); return NEGATION; }
 "FIXE"                     { printf("Token FIXE trouvé\n"); return FIXE; }
-"afficher"                 { printf("Token AFFICHE trouvé\n"); return AFFICHE; }
+"affiche"                 { printf("Token AFFICHE trouvé\n"); return AFFICHE; }
 "lire"                     { printf("Token LIRE trouvé\n"); return LIRE; }
 [A-Za-z][A-Za-z0-9_éèêàùçàôâîù]{0,9}  { printf("Identifiant : %s\n", yytext); return ID; }
 [0-9]+                     { printf("Constante entière : %s\n", yytext); return CST; }

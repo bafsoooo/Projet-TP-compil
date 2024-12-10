@@ -47,7 +47,7 @@
      SI = 263,
      ALORS = 264,
      TEXT = 265,
-     ELSE = 266,
+     SINON = 266,
      TANTQUE = 267,
      FAIRE = 268,
      ID = 269,
@@ -91,7 +91,20 @@
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+{
+
+/* Line 1676 of yacc.c  */
+#line 14 "syntaxique.y"
+
+    int entier;
+    char* str;    
+
+
+
+/* Line 1676 of yacc.c  */
+#line 107 "syntaxique.tab.h"
+} YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

@@ -1,9 +1,9 @@
 DEBUT
-    FIXE NUM : MAX_VALEUR = 100; 
-    NUM : scores[10];
-    REAL : Salaire;
-    NUM : age ;
-    TEXT: nom ;
+    FIXE NUM : MAX_VALEUR = 100
+    NUM : scores[10]
+    REAL : Salaire
+    NUM : age 
+    TEXT: nom
 EXECUTION {
     -- Ceci est un commentaire sur une seule ligne ##
     A <- 2 ;

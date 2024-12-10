@@ -61,6 +61,20 @@ instructions:
     | lire
     ;
 
+instruction:
+    COMMENT_SINGLE
+    | COMMENT_MULTI
+    | affectation
+    | assignation
+    | instSI
+    | instTantQue
+    | affiche
+    | lire
+    ;
+assignation:
+   ID ASSIGNATION ID 
+   |ID ASSIGNATION ID operateur variables
+   ;
 affectation:
     ID AFFECTATION expression POINT_VIRGULE;
 
