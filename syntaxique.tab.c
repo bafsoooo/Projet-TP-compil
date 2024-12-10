@@ -1719,4 +1719,3 @@ int yyerror(char *s) {
     fprintf(stderr, "Erreur syntaxique : %s\n", s);  // Utiliser fprintf pour afficher sur stderr
     return 0;
 }
-
