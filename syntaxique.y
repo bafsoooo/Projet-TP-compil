@@ -16,8 +16,11 @@
     char* str;    
 }
 
+<<<<<<< HEAD
 
  
+=======
+>>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
 %start program
 
 %%
@@ -29,15 +32,25 @@ program:
     ;
 
 declarations:
+<<<<<<< HEAD
+=======
+    /* Liste de déclarations */
+>>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
     declaration
     | declarations declaration
     | /* vide */
     ;
 
 declaration:
+<<<<<<< HEAD
     type DEUX_POINTS ID POINT_VIRGULE
     | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE
     | FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE 
+=======
+    type DEUX_POINTS ID 
+    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT 
+    | FIXE type DEUX_POINTS ID ASSIGNATION CST 
+>>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
     ;
 
 type:
@@ -52,6 +65,7 @@ block:
 
 instructions:
     /* Liste d'instructions */
+<<<<<<< HEAD
     | COMMENT_SINGLE
     | COMMENT_MULTI
     | affectation
@@ -59,9 +73,28 @@ instructions:
     | instTantQue
     | affiche
     | lire
+=======
+    instruction instructions
+    | /* vide */
+>>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
     ;
 
+instruction:
+    COMMENT_SINGLE
+    | COMMENT_MULTI
+    | affectation
+    | assignation
+    | instSI
+    | instTantQue
+    | affiche
+    | lire
+    ;
+assignation:
+   ID ASSIGNATION ID 
+   |ID ASSIGNATION ID operateur variables
+   ;
 affectation:
+<<<<<<< HEAD
     ID AFFECTATION expression POINT_VIRGULE;
 
 variables:
@@ -77,6 +110,27 @@ expression:
     | expression comparaison expression
     | PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE
     | ID CROCHET_OUVRANT expression CROCHET_FERMANT  /* Accès à un tableau */
+=======
+    ID AFFECTATION expression 
+    | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression 
+    ;
+
+variables:
+    CST
+    | ID
+    ;
+
+expression:
+    variables                              /* Une variable ou une constante */
+    | expression operateur expression      /* Opérations arithmétiques */
+    | expression ET_LOGIQUE expression     /* Opération logique ET */
+    | expression OU_LOGIQUE expression     /* Opération logique OU */
+    | NEGATION expression                  /* Négation */
+    | expression comparaison expression    /* Comparaison */
+    | PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE  /* Expression entre parenthèses */
+    | ID CROCHET_OUVRANT expression CROCHET_FERMANT       /* Accès à un tableau */
+    | expression DEUX_POINTS
+>>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
     ;
 
 comparaison:
@@ -88,6 +142,7 @@ comparaison:
     | INF_EGAL
     ;
 
+<<<<<<< HEAD
 operateur :
    PLUS 
    | MOINS
@@ -109,6 +164,33 @@ affiche :
 
 lire:
     LIRE PARENTHESE_OUVRANTE variables  PARENTHESE_FERMANTE
+=======
+operateur:
+    PLUS 
+    | MOINS
+    | MUL 
+    | DIV
+    ;
+
+instSI:
+    SI PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE ALORS ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE SINON ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
+    | SI PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE ALORS ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
+    ;
+
+instTantQue:
+    TANTQUE PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE FAIRE ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
+    ;
+
+affiche:
+    AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PARENTHESE_FERMANTE  /* Chaîne simple */
+    | AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PLUS ID PARENTHESE_FERMANTE  /* Chaîne + Expression */
+    ;
+
+lire:
+    LIRE PARENTHESE_OUVRANTE variables PARENTHESE_FERMANTE 
+    ;
+
+>>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
 %%
 
 int main() {

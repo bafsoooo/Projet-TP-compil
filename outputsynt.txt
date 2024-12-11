@@ -6,7 +6,6 @@ Token DEUX_POINTS trouvé
 Identifiant : MAX_VALEUR
 Token ASSIGNATION trouvé
 Constante entière : 100
-Token POINT_VIRGULE trouvé
 Nouvelle ligne (3)
 Token NUM trouvé
 Token DEUX_POINTS trouvé
@@ -14,22 +13,18 @@ Identifiant : scores
 Token CROCHET_OUVRANT trouvé
 Constante entière : 10
 Token CROCHET_FERMANT trouvé
-Token POINT_VIRGULE trouvé
 Nouvelle ligne (4)
 Token REAL trouvé
 Token DEUX_POINTS trouvé
 Identifiant : Salaire
-Token POINT_VIRGULE trouvé
 Nouvelle ligne (5)
 Token NUM trouvé
 Token DEUX_POINTS trouvé
 Identifiant : age
-Token POINT_VIRGULE trouvé
 Nouvelle ligne (6)
 Token TEXT trouvé
 Token DEUX_POINTS trouvé
 Identifiant : nom
-Token POINT_VIRGULE trouvé
 Nouvelle ligne (7)
 Token EXECUTION trouvé
 Token ACCOLADE_OUVRANTE trouvé
@@ -37,3 +32,73 @@ Nouvelle ligne (8)
 Commentaire sur une seule ligne ignoré
 Nouvelle ligne (9)
 Identifiant : A
+Token AFFECTATION trouvé
+Constante entière : 2
+Nouvelle ligne (10)
+Identifiant : A
+Token AFFECTATION trouvé
+Identifiant : H
+Token OPERATEUR + trouvé
+Identifiant : D
+Nouvelle ligne (11)
+Identifiant : Tab
+Token CROCHET_OUVRANT trouvé
+Constante entière : 1
+Token CROCHET_FERMANT trouvé
+Token AFFECTATION trouvé
+Identifiant : a
+Token OPERATEUR + trouvé
+Identifiant : b
+Token OPERATEUR / trouvé
+Constante entière : 4
+Nouvelle ligne (12)
+Token SI trouvé
+Token PARENTHESE_OUVRANTE trouvé
+Identifiant : age
+Token SUPERIEUR trouvé
+Constante entière : 18
+Token PARENTHESE_FERMANTE trouvé
+Token ALORS trouvé
+Token ACCOLADE_OUVRANTE trouvé
+Nouvelle ligne (13)
+Token AFFICHE trouvé
+Token PARENTHESE_OUVRANTE trouvé
+Token GUILLEMENT trouvé
+Identifiant : Majeur
+Token GUILLEMENT trouvé
+Token PARENTHESE_FERMANTE trouvé
+Nouvelle ligne (14)
+Token ACCOLADE_FERMANTE trouvé
+Token SINON trouvé
+Token ACCOLADE_OUVRANTE trouvé
+Nouvelle ligne (15)
+Token AFFICHE trouvé
+Token PARENTHESE_OUVRANTE trouvé
+Token GUILLEMENT trouvé
+Identifiant : Mineur
+Token GUILLEMENT trouvé
+Token PARENTHESE_FERMANTE trouvé
+Nouvelle ligne (16)
+Token ACCOLADE_FERMANTE trouvé
+Nouvelle ligne (17)
+Token TANTQUE trouvé
+Token PARENTHESE_OUVRANTE trouvé
+Identifiant : compteur
+Token INFERIEUR trouvé
+Constante entière : 10
+Token PARENTHESE_FERMANTE trouvé
+Token FAIRE trouvé
+Nouvelle ligne (18)
+Token ACCOLADE_OUVRANTE trouvé
+Nouvelle ligne (19)
+Identifiant : compteur
+Token ASSIGNATION trouvé
+Identifiant : compteur
+Token OPERATEUR + trouvé
+Constante entière : 1
+Nouvelle ligne (20)
+Token ACCOLADE_FERMANTE trouvé
+Nouvelle ligne (21)
+Token ACCOLADE_FERMANTE trouvé
+Token FIN trouvé
+Programme syntaxiquement correct.
