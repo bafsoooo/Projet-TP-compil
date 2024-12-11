@@ -6,12 +6,16 @@ DEBUT
     TEXT: nom
 EXECUTION {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
     -- Ceci est un commentaire sur une seule ligne ##
     A <- 2 ;
     A <- H + D ;
     Tab[1] <- a + b / 4 ;
 }
 FIN
+<<<<<<< HEAD
 =======
 -- Ceci est un commentaire sur une seule ligne ##
     A <- 2 
@@ -28,3 +32,5 @@ FIN
     }
 }FIN
 >>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
+=======
+>>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
