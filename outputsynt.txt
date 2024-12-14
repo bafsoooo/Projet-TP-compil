@@ -100,5 +100,6 @@ Nouvelle ligne (20)
 Token ACCOLADE_FERMANTE trouvé
 Nouvelle ligne (21)
 Token ACCOLADE_FERMANTE trouvé
+Nouvelle ligne (22)
 Token FIN trouvé
-Programme syntaxiquement correct.
+Nouvelle ligne (23)

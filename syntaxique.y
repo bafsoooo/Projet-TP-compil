@@ -1,6 +1,6 @@
 %{
 #include <stdio.h>
-#include "syntaxique.tab.h"  // Inclure les tokens définis
+#include "syntaxique.tab.h"
 %}
 
 %token DEBUT EXECUTION FIN NUM REAL SI ALORS TEXT SINON TANTQUE FAIRE
@@ -15,29 +15,31 @@
     int entier;
     char* str;    
 }
+%left OU_LOGIQUE      
+%left ET_LOGIQUE    
+%left NEGATION   
+%left EGAL DIFFERENT SUPERIEUR SUP_EGAL INFERIEUR INF_EGAL
+%left PLUS MOINS
+%left MUL DIV
 
-
- 
 %start program
+
 
 %%
 
 program:
-    DEBUT declarations EXECUTION block FIN {
-        printf("Programme syntaxiquement correct.\n");
-    }
+    DEBUT declarations EXECUTION block FIN
     ;
 
 declarations:
-    declaration
+    /* vide */
     | declarations declaration
-    | /* vide */
     ;
 
 declaration:
-    type DEUX_POINTS ID POINT_VIRGULE
-    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE
-    | FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE 
+    type DEUX_POINTS ID 
+    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT 
+    | FIXE type DEUX_POINTS ID ASSIGNATION CST 
     ;
 
 type:
@@ -51,14 +53,8 @@ block:
     ;
 
 instructions:
-    /* Liste d'instructions */
-    | COMMENT_SINGLE
-    | COMMENT_MULTI
-    | affectation
-    | instSI
-    | instTantQue
-    | affiche
-    | lire
+    /* vide */
+    | instruction instructions
     ;
 
 instruction:
@@ -71,29 +67,48 @@ instruction:
     | affiche
     | lire
     ;
+
 assignation:
-   ID ASSIGNATION ID 
-   |ID ASSIGNATION ID operateur variables
-   ;
+    ID ASSIGNATION expression
+    ;
+
 affectation:
-    ID AFFECTATION expression POINT_VIRGULE;
+    ID AFFECTATION expression
+    | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression
+    ;
 
 variables:
     CST
     | ID
+    ;
 
 expression:
+    arithmetique                     /* Niveau de base */
+    | logique                        /* Logiques produisent des expressions */
+    ;
+
+arithmetique:
     variables
-    | expression operateur expression
-    | expression ET_LOGIQUE expression
-    | expression OU_LOGIQUE expression
-    | NEGATION expression
-    | expression comparaison expression
-    | PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE
-    | ID CROCHET_OUVRANT expression CROCHET_FERMANT  /* Accès à un tableau */
+    | arithmetique PLUS arithmetique
+    | arithmetique MOINS arithmetique
+    | arithmetique MUL arithmetique
+    | arithmetique DIV arithmetique
+    | PARENTHESE_OUVRANTE arithmetique PARENTHESE_FERMANTE
+    ;
+
+logique:
+    comparaison                     /* Comparaison comme base logique */
+    | logique ET_LOGIQUE logique    /* Opérateur logique `ET` */
+    | logique OU_LOGIQUE logique    /* Opérateur logique `OU` */
+    | NEGATION logique              /* Négation */
+    | PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE
     ;
 
 comparaison:
+    arithmetique comparaison_operateurs arithmetique
+    ;
+
+comparaison_operateurs:
     EGAL
     | DIFFERENT
     | SUPERIEUR
@@ -102,34 +117,31 @@ comparaison:
     | INF_EGAL
     ;
 
-operateur :
-   PLUS 
-   | MOINS
-   | MUL 
-   | DIV
-   ;
+instSI:
+    SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block SINON block
+    | SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block
+    ;
 
+instTantQue:
+    TANTQUE PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE FAIRE block
+    ;
 
-instSI :
-    SI PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE ALORS ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
-    | SI PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE ALORS ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE SINON ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE  
-    
-
-instTantQue :
-    TANTQUE PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE FAIRE ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
-
-affiche :
-    AFFICHE PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE
+affiche:
+    AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PARENTHESE_FERMANTE
+    | AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PLUS ID PARENTHESE_FERMANTE
+    ;
 
 lire:
-    LIRE PARENTHESE_OUVRANTE variables  PARENTHESE_FERMANTE
+    LIRE PARENTHESE_OUVRANTE variables PARENTHESE_FERMANTE 
+    ;
+
 %%
 
 int main() {
-    return yyparse();  // Appel de l'analyseur syntaxique généré par Bison
+    return yyparse();
 }
 
 int yyerror(char *s) {
-    fprintf(stderr, "Erreur syntaxique : %s\n", s);  // Utiliser fprintf pour afficher sur stderr
+    fprintf(stderr, "Erreur syntaxique : %s\n", s);
     return 0;
 }

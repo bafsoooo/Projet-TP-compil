@@ -1,7 +1,6 @@
 %{
 #include "syntaxique.tab.h"
 #include <stdio.h>
-extern YYSTYPE yylval;
 int nb_ligne = 1;
 %}
 
@@ -16,7 +15,6 @@ int nb_ligne = 1;
 "SI"                       { printf("Token SI trouvé\n"); return SI; }
 "SINON"                    { printf("Token SINON trouvé\n"); return SINON; }
 "ALORS"                    { printf("Token ALORS trouvé\n"); return ALORS; }
-"SINON"                    { printf("Token SINON trouvé\n"); return SINON; }
 "TANTQUE"                  { printf("Token TANTQUE trouvé\n"); return TANTQUE; }
 "FAIRE"                    { printf("Token FAIRE trouvé\n"); return FAIRE; }
 "ET"                       { printf("Token ET_LOGIQUE trouvé\n"); return ET_LOGIQUE; }
@@ -53,7 +51,7 @@ int nb_ligne = 1;
 "##"                       { printf("Token DOUBLE_SHARP trouvé\n"); return DOUBLE_SHARP; }
 "\"([^\"\\]|\\.)*\""       { printf("Chaîne de caractères : %s\n", yytext); return STRING; }
 "--"([^#\n]*|#[^#])*"##"   { printf("Commentaire sur une seule ligne ignoré\n"); return COMMENT_SINGLE; }
-"{-([^{}]*|{[^}]*})*-}"     { printf("Commentaire multi-ligne ignoré\n"); return COMMENT_MULTI; }
+"{-\\*[^*]*\\*+(?:[^/*][^*]*\\*+)-}"            { printf("Commentaire multi-ligne ignoré\n"); return COMMENT_MULTI; }
 
 
 [ \t\r]+                   { /* Ignorer les espaces et tabulations */ }

@@ -6,8 +6,17 @@ DEBUT
     TEXT: nom
 EXECUTION {
     -- Ceci est un commentaire sur une seule ligne ##
-    A <- 2 ;
-    A <- H + D ;
-    Tab[1] <- a + b / 4 ;
-}
+    A <- 2 
+    A <- H + D 
+    Tab[1] <- a + b / 4 
+    SI (age > 18) ALORS {
+    affiche("Majeur")
+    } SINON {
+    affiche("Mineur")
+    }
+    TANTQUE (compteur < 10) FAIRE
+    {
+    compteur = compteur + 1
+    }
+}    
 FIN
