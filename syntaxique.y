@@ -1,7 +1,21 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
 #include "syntaxique.tab.h"  // Inclure les tokens définis
+
+void check_division_by_zero(int value) {
+    if (value == 0) {
+        fprintf(stderr, "Erreur: Division par zéro\n");
+        exit(EXIT_FAILURE);
+    }
+}
 %}
+
+%union {
+    int entier;
+    char* str; 
+    float numvrg;   
+}
 
 %token DEBUT EXECUTION FIN NUM REAL SI ALORS TEXT SINON TANTQUE FAIRE
 %token ID CST STRING ET_LOGIQUE OU_LOGIQUE NEGATION FIXE AFFICHE LIRE EGAL DIFFERENT 
@@ -11,21 +25,10 @@
 %token GUILLEMENT DOUBLE_SHARP
 %token COMMENT_SINGLE COMMENT_MULTI
 
-%union {
-    int entier;
-    char* str;    
-}
+%type <entier> CST
+%type <str> ID STRING
+%type <numvrg> NUM REAL
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
- 
-=======
->>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
-=======
-
- 
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
 %start program
 
 %%
@@ -37,34 +40,18 @@ program:
     ;
 
 declarations:
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
     /* Liste de déclarations */
->>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
-=======
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
     declaration
     | declarations declaration
     | /* vide */
     ;
 
 declaration:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    type DEUX_POINTS ID POINT_VIRGULE
+        type DEUX_POINTS ID POINT_VIRGULE
     | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE
     | FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE 
-=======
-    type DEUX_POINTS ID 
-    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT 
-    | FIXE type DEUX_POINTS ID ASSIGNATION CST 
->>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
-=======
-    type DEUX_POINTS ID POINT_VIRGULE
-    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE
-    | FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE 
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
+
     ;
 
 type:
@@ -79,10 +66,6 @@ block:
 
 instructions:
     /* Liste d'instructions */
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
     | COMMENT_SINGLE
     | COMMENT_MULTI
     | affectation
@@ -90,13 +73,8 @@ instructions:
     | instTantQue
     | affiche
     | lire
-<<<<<<< HEAD
-=======
     instruction instructions
     | /* vide */
->>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
-=======
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
     ;
 
 instruction:
@@ -113,31 +91,7 @@ assignation:
    ID ASSIGNATION ID 
    |ID ASSIGNATION ID operateur variables
    ;
-affectation:
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
     ID AFFECTATION expression POINT_VIRGULE;
-
-variables:
-    CST
-    | ID
-
-expression:
-    variables
-    | expression operateur expression
-    | expression ET_LOGIQUE expression
-    | expression OU_LOGIQUE expression
-    | NEGATION expression
-    | expression comparaison expression
-    | PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE
-    | ID CROCHET_OUVRANT expression CROCHET_FERMANT  /* Accès à un tableau */
-<<<<<<< HEAD
-=======
-    ID AFFECTATION expression 
-    | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression 
-    ;
 
 variables:
     CST
@@ -146,7 +100,14 @@ variables:
 
 expression:
     variables                              /* Une variable ou une constante */
-    | expression operateur expression      /* Opérations arithmétiques */
+   | expression PLUS expression           /* Opérations arithmétiques */
+    | expression MOINS expression
+    | expression MUL expression
+    | expression DIV expression {
+        check_division_by_zero($3);
+        printf("la divion est%s= %s/%d",$1,$3,$$);
+        YYACCEPT;
+    }
     | expression ET_LOGIQUE expression     /* Opération logique ET */
     | expression OU_LOGIQUE expression     /* Opération logique OU */
     | NEGATION expression                  /* Négation */
@@ -154,9 +115,6 @@ expression:
     | PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE  /* Expression entre parenthèses */
     | ID CROCHET_OUVRANT expression CROCHET_FERMANT       /* Accès à un tableau */
     | expression DEUX_POINTS
->>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
-=======
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
     ;
 
 comparaison:
@@ -168,33 +126,6 @@ comparaison:
     | INF_EGAL
     ;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
-operateur :
-   PLUS 
-   | MOINS
-   | MUL 
-   | DIV
-   ;
-
-
-instSI :
-    SI PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE ALORS ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
-    | SI PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE ALORS ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE SINON ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE  
-    
-
-instTantQue :
-    TANTQUE PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE FAIRE ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
-
-affiche :
-    AFFICHE PARENTHESE_OUVRANTE expression PARENTHESE_FERMANTE
-
-lire:
-    LIRE PARENTHESE_OUVRANTE variables  PARENTHESE_FERMANTE
-<<<<<<< HEAD
-=======
 operateur:
     PLUS 
     | MOINS
@@ -219,13 +150,10 @@ affiche:
 lire:
     LIRE PARENTHESE_OUVRANTE variables PARENTHESE_FERMANTE 
     ;
-
->>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
-=======
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
 %%
 
 int main() {
+    afficher();
     return yyparse();  // Appel de l'analyseur syntaxique généré par Bison
 }
 
