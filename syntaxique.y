@@ -1,7 +1,22 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
 #include "syntaxique.tab.h"
+
+// Fonction pour vérifier la division par zéro
+void check_division_by_zero(int value) {
+    if (value == 0) {
+        fprintf(stderr, "Erreur: Division par zéro\n");
+        exit(EXIT_FAILURE);
+    }
+}
 %}
+
+%union {
+    int entier;     // Pour les constantes entières
+    char* str;      // Pour les chaînes de caractères
+    float numvrg;   // Pour les constantes réelles
+}
 
 %token DEBUT EXECUTION FIN NUM REAL SI ALORS TEXT SINON TANTQUE FAIRE
 %token ID CST STRING ET_LOGIQUE OU_LOGIQUE NEGATION FIXE AFFICHE LIRE EGAL DIFFERENT 
@@ -11,10 +26,6 @@
 %token GUILLEMENT DOUBLE_SHARP
 %token COMMENT_SINGLE COMMENT_MULTI
 
-%union {
-    int entier;
-    char* str;    
-}
 %left OU_LOGIQUE      
 %left ET_LOGIQUE    
 %left NEGATION   
@@ -22,24 +33,37 @@
 %left PLUS MOINS
 %left MUL DIV
 
-%start program
+%type <numvrg> NUM REAL
+%type <entier> CST
+%type <entier> arithmetique
+%type <entier> variables
+%type <str> ID 
 
+%start program
 
 %%
 
 program:
-    DEBUT declarations EXECUTION block FIN
+    DEBUT declarations EXECUTION block FIN {
+        printf("Programme syntaxiquement correct.\n");
+        afficher();
+        YYACCEPT;
+    }
     ;
 
 declarations:
-    /* vide */
-    | declarations declaration
+     declarations declaration
+    | /* vide */
     ;
 
 declaration:
-    type DEUX_POINTS ID 
-    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT 
-    | FIXE type DEUX_POINTS ID ASSIGNATION CST 
+    type DEUX_POINTS ID POINT_VIRGULE
+    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE
+    | constant
+    ;
+
+constant:
+    FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE
     ;
 
 type:
@@ -69,38 +93,46 @@ instruction:
     ;
 
 assignation:
-    ID ASSIGNATION expression
+    ID ASSIGNATION expression POINT_VIRGULE
     ;
 
 affectation:
-    ID AFFECTATION expression
-    | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression
+    ID AFFECTATION expression POINT_VIRGULE
+    | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression POINT_VIRGULE
     ;
 
 variables:
-    CST
-    | ID
+    CST { $$ = $1; }
+    | ID { $$ = 0; }
     ;
 
 expression:
     arithmetique                     /* Niveau de base */
-    | logique                        /* Logiques produisent des expressions */
+    | logique  /* Logiques produisent des expressions */   
+    | STRING separateurs             
     ;
-
+separateurs:
+    DEUX_POINTS
+    |POINT
+    |POINT_VIRGULE
 arithmetique:
     variables
-    | arithmetique PLUS arithmetique
-    | arithmetique MOINS arithmetique
-    | arithmetique MUL arithmetique
-    | arithmetique DIV arithmetique
-    | PARENTHESE_OUVRANTE arithmetique PARENTHESE_FERMANTE
+    | arithmetique PLUS arithmetique  { $$ = $1 + $3; }
+    | arithmetique MOINS arithmetique { $$ = $1 - $3; }
+    | arithmetique MUL arithmetique { $$ = $1 * $3; }
+    | arithmetique DIV arithmetique {
+        check_division_by_zero($3);
+        $$ = $1 / $3;
+        printf("La division est : %d / %d = %d\n", $1, $3, $$);
+    }
+    | PARENTHESE_OUVRANTE arithmetique PARENTHESE_FERMANTE { $$ = $2; }
     ;
 
 logique:
-    comparaison                     /* Comparaison comme base logique */
-    | logique ET_LOGIQUE logique    /* Opérateur logique `ET` */
-    | logique OU_LOGIQUE logique    /* Opérateur logique `OU` */
-    | NEGATION logique              /* Négation */
+    comparaison
+    | logique ET_LOGIQUE logique
+    | logique OU_LOGIQUE logique
+    | NEGATION logique
     | PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE
     ;
 
@@ -118,8 +150,8 @@ comparaison_operateurs:
     ;
 
 instSI:
-    SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block SINON block
-    | SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block
+    SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block
+    | SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block SINON block
     ;
 
 instTantQue:
@@ -132,15 +164,17 @@ affiche:
     ;
 
 lire:
-    LIRE PARENTHESE_OUVRANTE variables PARENTHESE_FERMANTE 
+    LIRE PARENTHESE_OUVRANTE variables PARENTHESE_FERMANTE
     ;
 
 %%
 
+// Fonction principale
 int main() {
     return yyparse();
 }
 
+// Gestion des erreurs syntaxiques
 int yyerror(char *s) {
     fprintf(stderr, "Erreur syntaxique : %s\n", s);
     return 0;

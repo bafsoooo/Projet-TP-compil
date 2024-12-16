@@ -95,15 +95,16 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 14 "syntaxique.y"
+#line 15 "syntaxique.y"
 
-    int entier;
-    char* str;    
+    int entier;     // Pour les constantes entières
+    char* str;      // Pour les chaînes de caractères
+    float numvrg;   // Pour les constantes réelles
 
 
 
 /* Line 1676 of yacc.c  */
-#line 107 "syntaxique.tab.h"
+#line 108 "syntaxique.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
