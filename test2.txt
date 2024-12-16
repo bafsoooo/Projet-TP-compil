@@ -1,26 +1,15 @@
 DEBUT
-    FIXE NUM : MAX_VALEUR = 100
-    NUM : scores[10]
-    REAL : Salaire
-    NUM : age 
-    TEXT: nom
+    FIXE NUM : MAX_VALEUR = 100 ;
+    NUM : scores[10] ;
+    REAL : Salaire ;
+    NUM : age ;
+    TEXT: nom ;
 EXECUTION {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
+
     -- Ceci est un commentaire sur une seule ligne ##
     A <- 2 ;
-    A <- H + D ;
-    Tab[1] <- a + b / 4 ;
-}
-FIN
-<<<<<<< HEAD
-=======
--- Ceci est un commentaire sur une seule ligne ##
-    A <- 2 
-    A <- H+D
-    Tab[1] <- a+b/4 
+    A <- H + D ; 
+    Tab[1] <- a + b / 4 ; 
     SI (age > 18) ALORS {
     affiche("Majeur")
     } SINON {
@@ -28,9 +17,8 @@ FIN
     }
     TANTQUE (compteur < 10) FAIRE
     {
-    compteur = compteur + 1
+    compteur = compteur + 1 ;
     }
-}FIN
->>>>>>> 2b17d74aea473e47d0ade34e0b4b21052dd6849e
-=======
->>>>>>> d12b265f9d4a01db78d17e8e15a75faf5c95c6f8
+}    
+FIN
+

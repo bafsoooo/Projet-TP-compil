@@ -1,0 +1,1248 @@
+Terminals unused in grammar
+
+   STRING
+   POINT_VIRGULE
+   VIRGULE
+   POINT
+   DOUBLE_SHARP
+
+
+Grammaire
+
+    0 $accept: program $end
+
+    1 program: DEBUT declarations EXECUTION block FIN
+
+    2 declarations: declarations declaration
+    3             | /* vide */
+
+    4 declaration: type DEUX_POINTS ID
+    5            | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT
+    6            | constant
+
+    7 constant: FIXE type DEUX_POINTS ID ASSIGNATION CST
+
+    8 type: NUM
+    9     | REAL
+   10     | TEXT
+
+   11 block: ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE
+
+   12 instructions: /* vide */
+   13             | instruction instructions
+
+   14 instruction: COMMENT_SINGLE
+   15            | COMMENT_MULTI
+   16            | affectation
+   17            | assignation
+   18            | instSI
+   19            | instTantQue
+   20            | affiche
+   21            | lire
+
+   22 assignation: ID ASSIGNATION expression
+
+   23 affectation: ID AFFECTATION expression
+   24            | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression
+
+   25 variables: CST
+   26          | ID
+
+   27 expression: arithmetique
+   28           | logique
+
+   29 arithmetique: CST
+   30             | arithmetique PLUS arithmetique
+   31             | arithmetique MOINS arithmetique
+   32             | arithmetique MUL arithmetique
+   33             | arithmetique DIV arithmetique
+   34             | PARENTHESE_OUVRANTE arithmetique PARENTHESE_FERMANTE
+
+   35 logique: comparaison
+   36        | logique ET_LOGIQUE logique
+   37        | logique OU_LOGIQUE logique
+   38        | NEGATION logique
+   39        | PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE
+
+   40 comparaison: arithmetique comparaison_operateurs arithmetique
+
+   41 comparaison_operateurs: EGAL
+   42                       | DIFFERENT
+   43                       | SUPERIEUR
+   44                       | SUP_EGAL
+   45                       | INFERIEUR
+   46                       | INF_EGAL
+
+   47 instSI: SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block SINON block
+   48       | SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block
+
+   49 instTantQue: TANTQUE PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE FAIRE block
+
+   50 affiche: AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PARENTHESE_FERMANTE
+   51        | AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PLUS ID PARENTHESE_FERMANTE
+
+   52 lire: LIRE PARENTHESE_OUVRANTE variables PARENTHESE_FERMANTE
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+$end (0) 0
+error (256)
+DEBUT (258) 1
+EXECUTION (259) 1
+FIN (260) 1
+NUM (261) 8
+REAL (262) 9
+SI (263) 47 48
+ALORS (264) 47 48
+TEXT (265) 10
+SINON (266) 47
+TANTQUE (267) 49
+FAIRE (268) 49
+ID (269) 4 5 7 22 23 24 26 51
+CST (270) 5 7 25 29
+STRING (271)
+ET_LOGIQUE (272) 36
+OU_LOGIQUE (273) 37
+NEGATION (274) 38
+FIXE (275) 7
+AFFICHE (276) 50 51
+LIRE (277) 52
+EGAL (278) 41
+DIFFERENT (279) 42
+ASSIGNATION (280) 7 22
+SUPERIEUR (281) 43
+SUP_EGAL (282) 44
+INFERIEUR (283) 45
+INF_EGAL (284) 46
+AFFECTATION (285) 23 24
+PLUS (286) 30 51
+MOINS (287) 31
+MUL (288) 32
+DIV (289) 33
+POINT_VIRGULE (290)
+DEUX_POINTS (291) 4 5 7
+VIRGULE (292)
+POINT (293)
+PARENTHESE_OUVRANTE (294) 34 39 47 48 49 50 51 52
+PARENTHESE_FERMANTE (295) 34 39 47 48 49 50 51 52
+CROCHET_OUVRANT (296) 5 24
+CROCHET_FERMANT (297) 5 24
+ACCOLADE_OUVRANTE (298) 11
+ACCOLADE_FERMANTE (299) 11
+GUILLEMENT (300) 50 51
+DOUBLE_SHARP (301)
+COMMENT_SINGLE (302) 14
+COMMENT_MULTI (303) 15
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+$accept (49)
+    à gauche: 0
+program (50)
+    à gauche: 1, à droite: 0
+declarations (51)
+    à gauche: 2 3, à droite: 1 2
+declaration (52)
+    à gauche: 4 5 6, à droite: 2
+constant (53)
+    à gauche: 7, à droite: 6
+type (54)
+    à gauche: 8 9 10, à droite: 4 5 7
+block (55)
+    à gauche: 11, à droite: 1 47 48 49
+instructions (56)
+    à gauche: 12 13, à droite: 11 13
+instruction (57)
+    à gauche: 14 15 16 17 18 19 20 21, à droite: 13
+assignation (58)
+    à gauche: 22, à droite: 17
+affectation (59)
+    à gauche: 23 24, à droite: 16
+variables (60)
+    à gauche: 25 26, à droite: 52
+expression (61)
+    à gauche: 27 28, à droite: 22 23 24 50 51
+arithmetique (62)
+    à gauche: 29 30 31 32 33 34, à droite: 27 30 31 32 33 34 40
+logique (63)
+    à gauche: 35 36 37 38 39, à droite: 28 36 37 38 39 47 48 49
+comparaison (64)
+    à gauche: 40, à droite: 35
+comparaison_operateurs (65)
+    à gauche: 41 42 43 44 45 46, à droite: 40
+instSI (66)
+    à gauche: 47 48, à droite: 18
+instTantQue (67)
+    à gauche: 49, à droite: 19
+affiche (68)
+    à gauche: 50 51, à droite: 20
+lire (69)
+    à gauche: 52, à droite: 21
+
+
+état 0
+
+    0 $accept: . program $end
+
+    DEBUT  décalage et aller à l'état 1
+
+    program  aller à l'état 2
+
+
+état 1
+
+    1 program: DEBUT . declarations EXECUTION block FIN
+
+    $défaut  réduction par utilisation de la règle 3 (declarations)
+
+    declarations  aller à l'état 3
+
+
+état 2
+
+    0 $accept: program . $end
+
+    $end  décalage et aller à l'état 4
+
+
+état 3
+
+    1 program: DEBUT declarations . EXECUTION block FIN
+    2 declarations: declarations . declaration
+
+    EXECUTION  décalage et aller à l'état 5
+    NUM        décalage et aller à l'état 6
+    REAL       décalage et aller à l'état 7
+    TEXT       décalage et aller à l'état 8
+    FIXE       décalage et aller à l'état 9
+
+    declaration  aller à l'état 10
+    constant     aller à l'état 11
+    type         aller à l'état 12
+
+
+état 4
+
+    0 $accept: program $end .
+
+    $défaut  accepter
+
+
+état 5
+
+    1 program: DEBUT declarations EXECUTION . block FIN
+
+    ACCOLADE_OUVRANTE  décalage et aller à l'état 13
+
+    block  aller à l'état 14
+
+
+état 6
+
+    8 type: NUM .
+
+    $défaut  réduction par utilisation de la règle 8 (type)
+
+
+état 7
+
+    9 type: REAL .
+
+    $défaut  réduction par utilisation de la règle 9 (type)
+
+
+état 8
+
+   10 type: TEXT .
+
+    $défaut  réduction par utilisation de la règle 10 (type)
+
+
+état 9
+
+    7 constant: FIXE . type DEUX_POINTS ID ASSIGNATION CST
+
+    NUM   décalage et aller à l'état 6
+    REAL  décalage et aller à l'état 7
+    TEXT  décalage et aller à l'état 8
+
+    type  aller à l'état 15
+
+
+état 10
+
+    2 declarations: declarations declaration .
+
+    $défaut  réduction par utilisation de la règle 2 (declarations)
+
+
+état 11
+
+    6 declaration: constant .
+
+    $défaut  réduction par utilisation de la règle 6 (declaration)
+
+
+état 12
+
+    4 declaration: type . DEUX_POINTS ID
+    5            | type . DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT
+
+    DEUX_POINTS  décalage et aller à l'état 16
+
+
+état 13
+
+   11 block: ACCOLADE_OUVRANTE . instructions ACCOLADE_FERMANTE
+
+    SI              décalage et aller à l'état 17
+    TANTQUE         décalage et aller à l'état 18
+    ID              décalage et aller à l'état 19
+    AFFICHE         décalage et aller à l'état 20
+    LIRE            décalage et aller à l'état 21
+    COMMENT_SINGLE  décalage et aller à l'état 22
+    COMMENT_MULTI   décalage et aller à l'état 23
+
+    $défaut  réduction par utilisation de la règle 12 (instructions)
+
+    instructions  aller à l'état 24
+    instruction   aller à l'état 25
+    assignation   aller à l'état 26
+    affectation   aller à l'état 27
+    instSI        aller à l'état 28
+    instTantQue   aller à l'état 29
+    affiche       aller à l'état 30
+    lire          aller à l'état 31
+
+
+état 14
+
+    1 program: DEBUT declarations EXECUTION block . FIN
+
+    FIN  décalage et aller à l'état 32
+
+
+état 15
+
+    7 constant: FIXE type . DEUX_POINTS ID ASSIGNATION CST
+
+    DEUX_POINTS  décalage et aller à l'état 33
+
+
+état 16
+
+    4 declaration: type DEUX_POINTS . ID
+    5            | type DEUX_POINTS . ID CROCHET_OUVRANT CST CROCHET_FERMANT
+
+    ID  décalage et aller à l'état 34
+
+
+état 17
+
+   47 instSI: SI . PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block SINON block
+   48       | SI . PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block
+
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 35
+
+
+état 18
+
+   49 instTantQue: TANTQUE . PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE FAIRE block
+
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 36
+
+
+état 19
+
+   22 assignation: ID . ASSIGNATION expression
+   23 affectation: ID . AFFECTATION expression
+   24            | ID . CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression
+
+    ASSIGNATION      décalage et aller à l'état 37
+    AFFECTATION      décalage et aller à l'état 38
+    CROCHET_OUVRANT  décalage et aller à l'état 39
+
+
+état 20
+
+   50 affiche: AFFICHE . PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PARENTHESE_FERMANTE
+   51        | AFFICHE . PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PLUS ID PARENTHESE_FERMANTE
+
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 40
+
+
+état 21
+
+   52 lire: LIRE . PARENTHESE_OUVRANTE variables PARENTHESE_FERMANTE
+
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 41
+
+
+état 22
+
+   14 instruction: COMMENT_SINGLE .
+
+    $défaut  réduction par utilisation de la règle 14 (instruction)
+
+
+état 23
+
+   15 instruction: COMMENT_MULTI .
+
+    $défaut  réduction par utilisation de la règle 15 (instruction)
+
+
+état 24
+
+   11 block: ACCOLADE_OUVRANTE instructions . ACCOLADE_FERMANTE
+
+    ACCOLADE_FERMANTE  décalage et aller à l'état 42
+
+
+état 25
+
+   13 instructions: instruction . instructions
+
+    SI              décalage et aller à l'état 17
+    TANTQUE         décalage et aller à l'état 18
+    ID              décalage et aller à l'état 19
+    AFFICHE         décalage et aller à l'état 20
+    LIRE            décalage et aller à l'état 21
+    COMMENT_SINGLE  décalage et aller à l'état 22
+    COMMENT_MULTI   décalage et aller à l'état 23
+
+    $défaut  réduction par utilisation de la règle 12 (instructions)
+
+    instructions  aller à l'état 43
+    instruction   aller à l'état 25
+    assignation   aller à l'état 26
+    affectation   aller à l'état 27
+    instSI        aller à l'état 28
+    instTantQue   aller à l'état 29
+    affiche       aller à l'état 30
+    lire          aller à l'état 31
+
+
+état 26
+
+   17 instruction: assignation .
+
+    $défaut  réduction par utilisation de la règle 17 (instruction)
+
+
+état 27
+
+   16 instruction: affectation .
+
+    $défaut  réduction par utilisation de la règle 16 (instruction)
+
+
+état 28
+
+   18 instruction: instSI .
+
+    $défaut  réduction par utilisation de la règle 18 (instruction)
+
+
+état 29
+
+   19 instruction: instTantQue .
+
+    $défaut  réduction par utilisation de la règle 19 (instruction)
+
+
+état 30
+
+   20 instruction: affiche .
+
+    $défaut  réduction par utilisation de la règle 20 (instruction)
+
+
+état 31
+
+   21 instruction: lire .
+
+    $défaut  réduction par utilisation de la règle 21 (instruction)
+
+
+état 32
+
+    1 program: DEBUT declarations EXECUTION block FIN .
+
+    $défaut  réduction par utilisation de la règle 1 (program)
+
+
+état 33
+
+    7 constant: FIXE type DEUX_POINTS . ID ASSIGNATION CST
+
+    ID  décalage et aller à l'état 44
+
+
+état 34
+
+    4 declaration: type DEUX_POINTS ID .
+    5            | type DEUX_POINTS ID . CROCHET_OUVRANT CST CROCHET_FERMANT
+
+    CROCHET_OUVRANT  décalage et aller à l'état 45
+
+    $défaut  réduction par utilisation de la règle 4 (declaration)
+
+
+état 35
+
+   47 instSI: SI PARENTHESE_OUVRANTE . logique PARENTHESE_FERMANTE ALORS block SINON block
+   48       | SI PARENTHESE_OUVRANTE . logique PARENTHESE_FERMANTE ALORS block
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    arithmetique  aller à l'état 49
+    logique       aller à l'état 50
+    comparaison   aller à l'état 51
+
+
+état 36
+
+   49 instTantQue: TANTQUE PARENTHESE_OUVRANTE . logique PARENTHESE_FERMANTE FAIRE block
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    arithmetique  aller à l'état 49
+    logique       aller à l'état 52
+    comparaison   aller à l'état 51
+
+
+état 37
+
+   22 assignation: ID ASSIGNATION . expression
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    expression    aller à l'état 53
+    arithmetique  aller à l'état 54
+    logique       aller à l'état 55
+    comparaison   aller à l'état 51
+
+
+état 38
+
+   23 affectation: ID AFFECTATION . expression
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    expression    aller à l'état 56
+    arithmetique  aller à l'état 54
+    logique       aller à l'état 55
+    comparaison   aller à l'état 51
+
+
+état 39
+
+   24 affectation: ID CROCHET_OUVRANT . expression CROCHET_FERMANT AFFECTATION expression
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    expression    aller à l'état 57
+    arithmetique  aller à l'état 54
+    logique       aller à l'état 55
+    comparaison   aller à l'état 51
+
+
+état 40
+
+   50 affiche: AFFICHE PARENTHESE_OUVRANTE . GUILLEMENT expression GUILLEMENT PARENTHESE_FERMANTE
+   51        | AFFICHE PARENTHESE_OUVRANTE . GUILLEMENT expression GUILLEMENT PLUS ID PARENTHESE_FERMANTE
+
+    GUILLEMENT  décalage et aller à l'état 58
+
+
+état 41
+
+   52 lire: LIRE PARENTHESE_OUVRANTE . variables PARENTHESE_FERMANTE
+
+    ID   décalage et aller à l'état 59
+    CST  décalage et aller à l'état 60
+
+    variables  aller à l'état 61
+
+
+état 42
+
+   11 block: ACCOLADE_OUVRANTE instructions ACCOLADE_FERMANTE .
+
+    $défaut  réduction par utilisation de la règle 11 (block)
+
+
+état 43
+
+   13 instructions: instruction instructions .
+
+    $défaut  réduction par utilisation de la règle 13 (instructions)
+
+
+état 44
+
+    7 constant: FIXE type DEUX_POINTS ID . ASSIGNATION CST
+
+    ASSIGNATION  décalage et aller à l'état 62
+
+
+état 45
+
+    5 declaration: type DEUX_POINTS ID CROCHET_OUVRANT . CST CROCHET_FERMANT
+
+    CST  décalage et aller à l'état 63
+
+
+état 46
+
+   29 arithmetique: CST .
+
+    $défaut  réduction par utilisation de la règle 29 (arithmetique)
+
+
+état 47
+
+   38 logique: NEGATION . logique
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    arithmetique  aller à l'état 49
+    logique       aller à l'état 64
+    comparaison   aller à l'état 51
+
+
+état 48
+
+   34 arithmetique: PARENTHESE_OUVRANTE . arithmetique PARENTHESE_FERMANTE
+   39 logique: PARENTHESE_OUVRANTE . logique PARENTHESE_FERMANTE
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    arithmetique  aller à l'état 65
+    logique       aller à l'état 66
+    comparaison   aller à l'état 51
+
+
+état 49
+
+   30 arithmetique: arithmetique . PLUS arithmetique
+   31             | arithmetique . MOINS arithmetique
+   32             | arithmetique . MUL arithmetique
+   33             | arithmetique . DIV arithmetique
+   40 comparaison: arithmetique . comparaison_operateurs arithmetique
+
+    EGAL       décalage et aller à l'état 67
+    DIFFERENT  décalage et aller à l'état 68
+    SUPERIEUR  décalage et aller à l'état 69
+    SUP_EGAL   décalage et aller à l'état 70
+    INFERIEUR  décalage et aller à l'état 71
+    INF_EGAL   décalage et aller à l'état 72
+    PLUS       décalage et aller à l'état 73
+    MOINS      décalage et aller à l'état 74
+    MUL        décalage et aller à l'état 75
+    DIV        décalage et aller à l'état 76
+
+    comparaison_operateurs  aller à l'état 77
+
+
+état 50
+
+   36 logique: logique . ET_LOGIQUE logique
+   37        | logique . OU_LOGIQUE logique
+   47 instSI: SI PARENTHESE_OUVRANTE logique . PARENTHESE_FERMANTE ALORS block SINON block
+   48       | SI PARENTHESE_OUVRANTE logique . PARENTHESE_FERMANTE ALORS block
+
+    ET_LOGIQUE           décalage et aller à l'état 78
+    OU_LOGIQUE           décalage et aller à l'état 79
+    PARENTHESE_FERMANTE  décalage et aller à l'état 80
+
+
+état 51
+
+   35 logique: comparaison .
+
+    $défaut  réduction par utilisation de la règle 35 (logique)
+
+
+état 52
+
+   36 logique: logique . ET_LOGIQUE logique
+   37        | logique . OU_LOGIQUE logique
+   49 instTantQue: TANTQUE PARENTHESE_OUVRANTE logique . PARENTHESE_FERMANTE FAIRE block
+
+    ET_LOGIQUE           décalage et aller à l'état 78
+    OU_LOGIQUE           décalage et aller à l'état 79
+    PARENTHESE_FERMANTE  décalage et aller à l'état 81
+
+
+état 53
+
+   22 assignation: ID ASSIGNATION expression .
+
+    $défaut  réduction par utilisation de la règle 22 (assignation)
+
+
+état 54
+
+   27 expression: arithmetique .
+   30 arithmetique: arithmetique . PLUS arithmetique
+   31             | arithmetique . MOINS arithmetique
+   32             | arithmetique . MUL arithmetique
+   33             | arithmetique . DIV arithmetique
+   40 comparaison: arithmetique . comparaison_operateurs arithmetique
+
+    EGAL       décalage et aller à l'état 67
+    DIFFERENT  décalage et aller à l'état 68
+    SUPERIEUR  décalage et aller à l'état 69
+    SUP_EGAL   décalage et aller à l'état 70
+    INFERIEUR  décalage et aller à l'état 71
+    INF_EGAL   décalage et aller à l'état 72
+    PLUS       décalage et aller à l'état 73
+    MOINS      décalage et aller à l'état 74
+    MUL        décalage et aller à l'état 75
+    DIV        décalage et aller à l'état 76
+
+    $défaut  réduction par utilisation de la règle 27 (expression)
+
+    comparaison_operateurs  aller à l'état 77
+
+
+état 55
+
+   28 expression: logique .
+   36 logique: logique . ET_LOGIQUE logique
+   37        | logique . OU_LOGIQUE logique
+
+    ET_LOGIQUE  décalage et aller à l'état 78
+    OU_LOGIQUE  décalage et aller à l'état 79
+
+    $défaut  réduction par utilisation de la règle 28 (expression)
+
+
+état 56
+
+   23 affectation: ID AFFECTATION expression .
+
+    $défaut  réduction par utilisation de la règle 23 (affectation)
+
+
+état 57
+
+   24 affectation: ID CROCHET_OUVRANT expression . CROCHET_FERMANT AFFECTATION expression
+
+    CROCHET_FERMANT  décalage et aller à l'état 82
+
+
+état 58
+
+   50 affiche: AFFICHE PARENTHESE_OUVRANTE GUILLEMENT . expression GUILLEMENT PARENTHESE_FERMANTE
+   51        | AFFICHE PARENTHESE_OUVRANTE GUILLEMENT . expression GUILLEMENT PLUS ID PARENTHESE_FERMANTE
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    expression    aller à l'état 83
+    arithmetique  aller à l'état 54
+    logique       aller à l'état 55
+    comparaison   aller à l'état 51
+
+
+état 59
+
+   26 variables: ID .
+
+    $défaut  réduction par utilisation de la règle 26 (variables)
+
+
+état 60
+
+   25 variables: CST .
+
+    $défaut  réduction par utilisation de la règle 25 (variables)
+
+
+état 61
+
+   52 lire: LIRE PARENTHESE_OUVRANTE variables . PARENTHESE_FERMANTE
+
+    PARENTHESE_FERMANTE  décalage et aller à l'état 84
+
+
+état 62
+
+    7 constant: FIXE type DEUX_POINTS ID ASSIGNATION . CST
+
+    CST  décalage et aller à l'état 85
+
+
+état 63
+
+    5 declaration: type DEUX_POINTS ID CROCHET_OUVRANT CST . CROCHET_FERMANT
+
+    CROCHET_FERMANT  décalage et aller à l'état 86
+
+
+état 64
+
+   36 logique: logique . ET_LOGIQUE logique
+   37        | logique . OU_LOGIQUE logique
+   38        | NEGATION logique .
+
+    $défaut  réduction par utilisation de la règle 38 (logique)
+
+
+état 65
+
+   30 arithmetique: arithmetique . PLUS arithmetique
+   31             | arithmetique . MOINS arithmetique
+   32             | arithmetique . MUL arithmetique
+   33             | arithmetique . DIV arithmetique
+   34             | PARENTHESE_OUVRANTE arithmetique . PARENTHESE_FERMANTE
+   40 comparaison: arithmetique . comparaison_operateurs arithmetique
+
+    EGAL                 décalage et aller à l'état 67
+    DIFFERENT            décalage et aller à l'état 68
+    SUPERIEUR            décalage et aller à l'état 69
+    SUP_EGAL             décalage et aller à l'état 70
+    INFERIEUR            décalage et aller à l'état 71
+    INF_EGAL             décalage et aller à l'état 72
+    PLUS                 décalage et aller à l'état 73
+    MOINS                décalage et aller à l'état 74
+    MUL                  décalage et aller à l'état 75
+    DIV                  décalage et aller à l'état 76
+    PARENTHESE_FERMANTE  décalage et aller à l'état 87
+
+    comparaison_operateurs  aller à l'état 77
+
+
+état 66
+
+   36 logique: logique . ET_LOGIQUE logique
+   37        | logique . OU_LOGIQUE logique
+   39        | PARENTHESE_OUVRANTE logique . PARENTHESE_FERMANTE
+
+    ET_LOGIQUE           décalage et aller à l'état 78
+    OU_LOGIQUE           décalage et aller à l'état 79
+    PARENTHESE_FERMANTE  décalage et aller à l'état 88
+
+
+état 67
+
+   41 comparaison_operateurs: EGAL .
+
+    $défaut  réduction par utilisation de la règle 41 (comparaison_operateurs)
+
+
+état 68
+
+   42 comparaison_operateurs: DIFFERENT .
+
+    $défaut  réduction par utilisation de la règle 42 (comparaison_operateurs)
+
+
+état 69
+
+   43 comparaison_operateurs: SUPERIEUR .
+
+    $défaut  réduction par utilisation de la règle 43 (comparaison_operateurs)
+
+
+état 70
+
+   44 comparaison_operateurs: SUP_EGAL .
+
+    $défaut  réduction par utilisation de la règle 44 (comparaison_operateurs)
+
+
+état 71
+
+   45 comparaison_operateurs: INFERIEUR .
+
+    $défaut  réduction par utilisation de la règle 45 (comparaison_operateurs)
+
+
+état 72
+
+   46 comparaison_operateurs: INF_EGAL .
+
+    $défaut  réduction par utilisation de la règle 46 (comparaison_operateurs)
+
+
+état 73
+
+   30 arithmetique: arithmetique PLUS . arithmetique
+
+    CST                  décalage et aller à l'état 46
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 89
+
+    arithmetique  aller à l'état 90
+
+
+état 74
+
+   31 arithmetique: arithmetique MOINS . arithmetique
+
+    CST                  décalage et aller à l'état 46
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 89
+
+    arithmetique  aller à l'état 91
+
+
+état 75
+
+   32 arithmetique: arithmetique MUL . arithmetique
+
+    CST                  décalage et aller à l'état 46
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 89
+
+    arithmetique  aller à l'état 92
+
+
+état 76
+
+   33 arithmetique: arithmetique DIV . arithmetique
+
+    CST                  décalage et aller à l'état 46
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 89
+
+    arithmetique  aller à l'état 93
+
+
+état 77
+
+   40 comparaison: arithmetique comparaison_operateurs . arithmetique
+
+    CST                  décalage et aller à l'état 46
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 89
+
+    arithmetique  aller à l'état 94
+
+
+état 78
+
+   36 logique: logique ET_LOGIQUE . logique
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    arithmetique  aller à l'état 49
+    logique       aller à l'état 95
+    comparaison   aller à l'état 51
+
+
+état 79
+
+   37 logique: logique OU_LOGIQUE . logique
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    arithmetique  aller à l'état 49
+    logique       aller à l'état 96
+    comparaison   aller à l'état 51
+
+
+état 80
+
+   47 instSI: SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE . ALORS block SINON block
+   48       | SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE . ALORS block
+
+    ALORS  décalage et aller à l'état 97
+
+
+état 81
+
+   49 instTantQue: TANTQUE PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE . FAIRE block
+
+    FAIRE  décalage et aller à l'état 98
+
+
+état 82
+
+   24 affectation: ID CROCHET_OUVRANT expression CROCHET_FERMANT . AFFECTATION expression
+
+    AFFECTATION  décalage et aller à l'état 99
+
+
+état 83
+
+   50 affiche: AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression . GUILLEMENT PARENTHESE_FERMANTE
+   51        | AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression . GUILLEMENT PLUS ID PARENTHESE_FERMANTE
+
+    GUILLEMENT  décalage et aller à l'état 100
+
+
+état 84
+
+   52 lire: LIRE PARENTHESE_OUVRANTE variables PARENTHESE_FERMANTE .
+
+    $défaut  réduction par utilisation de la règle 52 (lire)
+
+
+état 85
+
+    7 constant: FIXE type DEUX_POINTS ID ASSIGNATION CST .
+
+    $défaut  réduction par utilisation de la règle 7 (constant)
+
+
+état 86
+
+    5 declaration: type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT .
+
+    $défaut  réduction par utilisation de la règle 5 (declaration)
+
+
+état 87
+
+   34 arithmetique: PARENTHESE_OUVRANTE arithmetique PARENTHESE_FERMANTE .
+
+    $défaut  réduction par utilisation de la règle 34 (arithmetique)
+
+
+état 88
+
+   39 logique: PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE .
+
+    $défaut  réduction par utilisation de la règle 39 (logique)
+
+
+état 89
+
+   34 arithmetique: PARENTHESE_OUVRANTE . arithmetique PARENTHESE_FERMANTE
+
+    CST                  décalage et aller à l'état 46
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 89
+
+    arithmetique  aller à l'état 101
+
+
+état 90
+
+   30 arithmetique: arithmetique . PLUS arithmetique
+   30             | arithmetique PLUS arithmetique .
+   31             | arithmetique . MOINS arithmetique
+   32             | arithmetique . MUL arithmetique
+   33             | arithmetique . DIV arithmetique
+
+    MUL  décalage et aller à l'état 75
+    DIV  décalage et aller à l'état 76
+
+    $défaut  réduction par utilisation de la règle 30 (arithmetique)
+
+
+état 91
+
+   30 arithmetique: arithmetique . PLUS arithmetique
+   31             | arithmetique . MOINS arithmetique
+   31             | arithmetique MOINS arithmetique .
+   32             | arithmetique . MUL arithmetique
+   33             | arithmetique . DIV arithmetique
+
+    MUL  décalage et aller à l'état 75
+    DIV  décalage et aller à l'état 76
+
+    $défaut  réduction par utilisation de la règle 31 (arithmetique)
+
+
+état 92
+
+   30 arithmetique: arithmetique . PLUS arithmetique
+   31             | arithmetique . MOINS arithmetique
+   32             | arithmetique . MUL arithmetique
+   32             | arithmetique MUL arithmetique .
+   33             | arithmetique . DIV arithmetique
+
+    $défaut  réduction par utilisation de la règle 32 (arithmetique)
+
+
+état 93
+
+   30 arithmetique: arithmetique . PLUS arithmetique
+   31             | arithmetique . MOINS arithmetique
+   32             | arithmetique . MUL arithmetique
+   33             | arithmetique . DIV arithmetique
+   33             | arithmetique DIV arithmetique .
+
+    $défaut  réduction par utilisation de la règle 33 (arithmetique)
+
+
+état 94
+
+   30 arithmetique: arithmetique . PLUS arithmetique
+   31             | arithmetique . MOINS arithmetique
+   32             | arithmetique . MUL arithmetique
+   33             | arithmetique . DIV arithmetique
+   40 comparaison: arithmetique comparaison_operateurs arithmetique .
+
+    PLUS   décalage et aller à l'état 73
+    MOINS  décalage et aller à l'état 74
+    MUL    décalage et aller à l'état 75
+    DIV    décalage et aller à l'état 76
+
+    $défaut  réduction par utilisation de la règle 40 (comparaison)
+
+
+état 95
+
+   36 logique: logique . ET_LOGIQUE logique
+   36        | logique ET_LOGIQUE logique .
+   37        | logique . OU_LOGIQUE logique
+
+    $défaut  réduction par utilisation de la règle 36 (logique)
+
+
+état 96
+
+   36 logique: logique . ET_LOGIQUE logique
+   37        | logique . OU_LOGIQUE logique
+   37        | logique OU_LOGIQUE logique .
+
+    ET_LOGIQUE  décalage et aller à l'état 78
+
+    $défaut  réduction par utilisation de la règle 37 (logique)
+
+
+état 97
+
+   47 instSI: SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS . block SINON block
+   48       | SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS . block
+
+    ACCOLADE_OUVRANTE  décalage et aller à l'état 13
+
+    block  aller à l'état 102
+
+
+état 98
+
+   49 instTantQue: TANTQUE PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE FAIRE . block
+
+    ACCOLADE_OUVRANTE  décalage et aller à l'état 13
+
+    block  aller à l'état 103
+
+
+état 99
+
+   24 affectation: ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION . expression
+
+    CST                  décalage et aller à l'état 46
+    NEGATION             décalage et aller à l'état 47
+    PARENTHESE_OUVRANTE  décalage et aller à l'état 48
+
+    expression    aller à l'état 104
+    arithmetique  aller à l'état 54
+    logique       aller à l'état 55
+    comparaison   aller à l'état 51
+
+
+état 100
+
+   50 affiche: AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT . PARENTHESE_FERMANTE
+   51        | AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT . PLUS ID PARENTHESE_FERMANTE
+
+    PLUS                 décalage et aller à l'état 105
+    PARENTHESE_FERMANTE  décalage et aller à l'état 106
+
+
+état 101
+
+   30 arithmetique: arithmetique . PLUS arithmetique
+   31             | arithmetique . MOINS arithmetique
+   32             | arithmetique . MUL arithmetique
+   33             | arithmetique . DIV arithmetique
+   34             | PARENTHESE_OUVRANTE arithmetique . PARENTHESE_FERMANTE
+
+    PLUS                 décalage et aller à l'état 73
+    MOINS                décalage et aller à l'état 74
+    MUL                  décalage et aller à l'état 75
+    DIV                  décalage et aller à l'état 76
+    PARENTHESE_FERMANTE  décalage et aller à l'état 87
+
+
+état 102
+
+   47 instSI: SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block . SINON block
+   48       | SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block .
+
+    SINON  décalage et aller à l'état 107
+
+    $défaut  réduction par utilisation de la règle 48 (instSI)
+
+
+état 103
+
+   49 instTantQue: TANTQUE PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE FAIRE block .
+
+    $défaut  réduction par utilisation de la règle 49 (instTantQue)
+
+
+état 104
+
+   24 affectation: ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression .
+
+    $défaut  réduction par utilisation de la règle 24 (affectation)
+
+
+état 105
+
+   51 affiche: AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PLUS . ID PARENTHESE_FERMANTE
+
+    ID  décalage et aller à l'état 108
+
+
+état 106
+
+   50 affiche: AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PARENTHESE_FERMANTE .
+
+    $défaut  réduction par utilisation de la règle 50 (affiche)
+
+
+état 107
+
+   47 instSI: SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block SINON . block
+
+    ACCOLADE_OUVRANTE  décalage et aller à l'état 13
+
+    block  aller à l'état 109
+
+
+état 108
+
+   51 affiche: AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PLUS ID . PARENTHESE_FERMANTE
+
+    PARENTHESE_FERMANTE  décalage et aller à l'état 110
+
+
+état 109
+
+   47 instSI: SI PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE ALORS block SINON block .
+
+    $défaut  réduction par utilisation de la règle 47 (instSI)
+
+
+état 110
+
+   51 affiche: AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PLUS ID PARENTHESE_FERMANTE .
+
+    $défaut  réduction par utilisation de la règle 51 (affiche)
