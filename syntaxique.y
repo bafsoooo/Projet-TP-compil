@@ -33,11 +33,14 @@ void check_division_by_zero(int value) {
 %left PLUS MOINS
 %left MUL DIV
 
-%type <numvrg> NUM REAL
 %type <entier> CST
-%type <entier> arithmetique
+%type <str> ID STRING
+%type <numvrg> NUM REAL
+%type <str> type
 %type <entier> variables
-%type <str> ID 
+%type <entier> arithmetique
+%type <entier> logique
+%type <entier> comparaison
 
 %start program
 
@@ -46,7 +49,6 @@ void check_division_by_zero(int value) {
 program:
     DEBUT declarations EXECUTION block FIN {
         printf("Programme syntaxiquement correct.\n");
-        afficher();
         YYACCEPT;
     }
     ;
@@ -57,19 +59,25 @@ declarations:
     ;
 
 declaration:
-    type DEUX_POINTS ID POINT_VIRGULE
-    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE
+    type DEUX_POINTS ID POINT_VIRGULE {
+        inserer($3, "idf", $1);
+    }
+    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE {
+        inserer($3, "idf", $1);
+    }
     | constant
     ;
 
 constant:
-    FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE
+    FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE {
+        inserer($4, "idf", $2);
+    }
     ;
 
 type:
-    NUM
-    | REAL
-    | TEXT
+    NUM { $$ = "NUM"; }
+    | REAL { $$ = "REAL"; }
+    | TEXT { $$ = "TEXT"; }
     ;
 
 block:
@@ -169,13 +177,13 @@ lire:
 
 %%
 
-// Fonction principale
-int main() {
-    return yyparse();
-}
-
-// Gestion des erreurs syntaxiques
-int yyerror(char *s) {
+void yyerror(char *msg) {
     fprintf(stderr, "Erreur syntaxique : %s\n", s);
-    return 0;
+}
+main ()
+{
+    yyparse();
+    afficher();
+}
+yywrap(){
 }

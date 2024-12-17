@@ -498,12 +498,12 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    47,    47,    55,    56,    60,    61,    62,    66,    70,
-      71,    72,    76,    79,    81,    85,    86,    87,    88,    89,
-      90,    91,    92,    96,   100,   101,   105,   106,   110,   111,
-     112,   115,   116,   117,   119,   120,   121,   122,   123,   128,
-     132,   133,   134,   135,   136,   140,   144,   145,   146,   147,
-     148,   149,   153,   154,   158,   162,   163,   167
+       0,    50,    50,    57,    58,    62,    65,    68,    72,    78,
+      79,    80,    84,    87,    89,    93,    94,    95,    96,    97,
+      98,    99,   100,   104,   108,   109,   113,   114,   118,   119,
+     120,   123,   124,   125,   127,   128,   129,   130,   131,   136,
+     140,   141,   142,   143,   144,   148,   152,   153,   154,   155,
+     156,   157,   161,   162,   166,   170,   171,   175
 };
 #endif
 
@@ -1493,53 +1493,100 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 47 "syntaxique.y"
+#line 50 "syntaxique.y"
     {
         printf("Programme syntaxiquement correct.\n");
-        afficher();
         YYACCEPT;
     ;}
+    break;
+
+  case 5:
+
+/* Line 1455 of yacc.c  */
+#line 62 "syntaxique.y"
+    {
+        inserer((yyvsp[(3) - (4)].str), "idf", (yyvsp[(1) - (4)].str));
+    ;}
+    break;
+
+  case 6:
+
+/* Line 1455 of yacc.c  */
+#line 65 "syntaxique.y"
+    {
+        inserer((yyvsp[(3) - (7)].str), "idf", (yyvsp[(1) - (7)].str));
+    ;}
+    break;
+
+  case 8:
+
+/* Line 1455 of yacc.c  */
+#line 72 "syntaxique.y"
+    {
+        inserer((yyvsp[(4) - (7)].str), "idf", (yyvsp[(2) - (7)].str));
+    ;}
+    break;
+
+  case 9:
+
+/* Line 1455 of yacc.c  */
+#line 78 "syntaxique.y"
+    { (yyval.str) = "NUM"; ;}
+    break;
+
+  case 10:
+
+/* Line 1455 of yacc.c  */
+#line 79 "syntaxique.y"
+    { (yyval.str) = "REAL"; ;}
+    break;
+
+  case 11:
+
+/* Line 1455 of yacc.c  */
+#line 80 "syntaxique.y"
+    { (yyval.str) = "TEXT"; ;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 105 "syntaxique.y"
+#line 113 "syntaxique.y"
     { (yyval.entier) = (yyvsp[(1) - (1)].entier); ;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 106 "syntaxique.y"
+#line 114 "syntaxique.y"
     { (yyval.entier) = 0; ;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 120 "syntaxique.y"
+#line 128 "syntaxique.y"
     { (yyval.entier) = (yyvsp[(1) - (3)].entier) + (yyvsp[(3) - (3)].entier); ;}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 121 "syntaxique.y"
+#line 129 "syntaxique.y"
     { (yyval.entier) = (yyvsp[(1) - (3)].entier) - (yyvsp[(3) - (3)].entier); ;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 122 "syntaxique.y"
+#line 130 "syntaxique.y"
     { (yyval.entier) = (yyvsp[(1) - (3)].entier) * (yyvsp[(3) - (3)].entier); ;}
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 123 "syntaxique.y"
+#line 131 "syntaxique.y"
     {
         check_division_by_zero((yyvsp[(3) - (3)].entier));
         (yyval.entier) = (yyvsp[(1) - (3)].entier) / (yyvsp[(3) - (3)].entier);
@@ -1550,14 +1597,14 @@ yyreduce:
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 128 "syntaxique.y"
+#line 136 "syntaxique.y"
     { (yyval.entier) = (yyvsp[(2) - (3)].entier); ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1561 "syntaxique.tab.c"
+#line 1608 "syntaxique.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1769,16 +1816,16 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 170 "syntaxique.y"
+#line 178 "syntaxique.y"
 
 
-// Fonction principale
-int main() {
-    return yyparse();
-}
-
-// Gestion des erreurs syntaxiques
-int yyerror(char *s) {
+void yyerror(char *msg) {
     fprintf(stderr, "Erreur syntaxique : %s\n", s);
-    return 0;
+}
+main ()
+{
+    yyparse();
+    afficher();
+}
+yywrap(){
 }
