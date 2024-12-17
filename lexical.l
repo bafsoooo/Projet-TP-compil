@@ -4,6 +4,10 @@
 #include "TS.h"
 extern YYSTYPE yylval;
 int nb_ligne = 1;
+int nb_colonne = 1;
+
+void yyerror(const char *msg);
+void lex_error(const char *msg);
 %}
 
 %%
@@ -56,10 +60,13 @@ int nb_ligne = 1;
 "{-([^{}]*|{[^-]*)*-}"     { printf("Commentaire multi-ligne ignoré\n"); return COMMENT_MULTI; }
 \"([^\"\\]\\.)*\"           { yylval.str = strdup(yytext); return STRING; }
 [ \t\r]+                   { /* Ignorer les espaces et tabulations */ }
-\n                         { nb_ligne++; printf("Nouvelle ligne (%d)\n", nb_ligne); }
-.                          { printf("Token non reconnu : %s\n", yytext); }
-
+\n                         { nb_ligne++; nb_colonne = 1; printf("Nouvelle ligne (%d)\n", nb_ligne); }
+.                          { lex_error("Token non reconnu"); }
 %%
+
+void lex_error(const char *msg) {
+    fprintf(stderr, "Erreur Lexicale à la ligne %d, colonne %d: %s\n", nb_ligne, nb_colonne, msg);
+}
 
 int yywrap() {
     return 1;

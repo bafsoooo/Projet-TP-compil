@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "syntaxique.tab.h"
-
+#include "TS.h"
 // Fonction pour vérifier la division par zéro
 void check_division_by_zero(int value) {
     if (value == 0) {
@@ -10,6 +10,11 @@ void check_division_by_zero(int value) {
         exit(EXIT_FAILURE);
     }
 }
+
+extern int nb_ligne;
+extern int nb_colonne;
+void yyerror(const char *msg);
+
 %}
 
 %union {
@@ -60,9 +65,11 @@ declarations:
 
 declaration:
     type DEUX_POINTS ID POINT_VIRGULE {
+        verifierDoubleDeclaration($3);
         inserer($3, "idf", $1);
     }
     | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE {
+        verifierDoubleDeclaration($3);
         inserer($3, "idf", $1);
     }
     | constant
@@ -70,6 +77,7 @@ declaration:
 
 constant:
     FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE {
+        verifierDoubleDeclaration($4);
         inserer($4, "idf", $2);
     }
     ;
@@ -101,17 +109,29 @@ instruction:
     ;
 
 assignation:
-    ID ASSIGNATION expression POINT_VIRGULE
+    ID ASSIGNATION expression POINT_VIRGULE {
+        verifierDeclaration($1);
+        TypeTS* var = recherche($1);
+        verifierCompatibiliteType(var->TypeEntite, $3);
+    }
     ;
 
 affectation:
-    ID AFFECTATION expression POINT_VIRGULE
-    | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression POINT_VIRGULE
+    ID AFFECTATION expression POINT_VIRGULE {
+        verifierDeclaration($1);
+        TypeTS* var = recherche($1);
+        verifierCompatibiliteType(var->TypeEntite, $3);
+    }
+    | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression POINT_VIRGULE {
+        verifierDeclaration($1);
+        TypeTS* var = recherche($1);
+        verifierCompatibiliteType(var->TypeEntite, $6);
+    }
     ;
 
 variables:
-    CST { $$ = $1; }
-    | ID { $$ = 0; }
+    CST { $$ = "NUM"; }
+    | ID { verifierDeclaration($1); TypeTS* var = recherche($1); $$ = var->TypeEntite; }
     ;
 
 expression:
@@ -125,12 +145,13 @@ separateurs:
     |POINT_VIRGULE
 arithmetique:
     variables
-    | arithmetique PLUS arithmetique  { $$ = $1 + $3; }
-    | arithmetique MOINS arithmetique { $$ = $1 - $3; }
-    | arithmetique MUL arithmetique { $$ = $1 * $3; }
+    | arithmetique PLUS arithmetique { verifierCompatibiliteType($1, $3); $$ = $1; }
+    | arithmetique MOINS arithmetique { verifierCompatibiliteType($1, $3); $$ = $1; }
+    | arithmetique MUL arithmetique { verifierCompatibiliteType($1, $3); $$ = $1; }
     | arithmetique DIV arithmetique {
         check_division_by_zero($3);
-        $$ = $1 / $3;
+        verifierCompatibiliteType($1, $3);
+        $$ = $1;
         printf("La division est : %d / %d = %d\n", $1, $3, $$);
     }
     | PARENTHESE_OUVRANTE arithmetique PARENTHESE_FERMANTE { $$ = $2; }
@@ -138,14 +159,14 @@ arithmetique:
 
 logique:
     comparaison
-    | logique ET_LOGIQUE logique
-    | logique OU_LOGIQUE logique
-    | NEGATION logique
-    | PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE
+    | logique ET_LOGIQUE logique { verifierCompatibiliteType($1, $3); $$ = $1; }
+    | logique OU_LOGIQUE logique { verifierCompatibiliteType($1, $3); $$ = $1; }
+    | NEGATION logique { $$ = $2; }
+    | PARENTHESE_OUVRANTE logique PARENTHESE_FERMANTE { $$ = $2; }
     ;
 
 comparaison:
-    arithmetique comparaison_operateurs arithmetique
+    arithmetique comparaison_operateurs arithmetique { verifierCompatibiliteType($1, $3); $$ = "NUM"; }
     ;
 
 comparaison_operateurs:
@@ -177,8 +198,8 @@ lire:
 
 %%
 
-void yyerror(char *msg) {
-    fprintf(stderr, "Erreur syntaxique : %s\n", s);
+void yyerror(const char *msg) {
+    fprintf(stderr, "Erreur Syntaxique à la ligne %d, colonne %d: %s\n", nb_ligne, nb_colonne, msg);
 }
 main ()
 {

@@ -58,6 +58,30 @@ void insererType(char* entite, char* type) {
     }
 }
 
+// Vérification de la déclaration d'une variable
+void verifierDeclaration(char* entite) {
+    if (recherche(entite) == NULL) {
+        fprintf(stderr, "Erreur sémantique : Variable '%s' non déclarée\n", entite);
+        exit(EXIT_FAILURE);
+    }
+}
+
+// Vérification de la double déclaration d'une variable
+void verifierDoubleDeclaration(char* entite) {
+    if (recherche(entite) != NULL) {
+        fprintf(stderr, "Erreur sémantique : Variable '%s' déjà déclarée\n", entite);
+        exit(EXIT_FAILURE);
+    }
+}
+
+// Vérification de la compatibilité des types
+void verifierCompatibiliteType(char* type1, char* type2) {
+    if (strcmp(type1, type2) != 0) {
+        fprintf(stderr, "Erreur sémantique : Incompatibilité de type entre '%s' et '%s'\n", type1, type2);
+        exit(EXIT_FAILURE);
+    }
+}
+
 // Affichage de la table de hachage
 void afficher() {
     printf("\n/*************** Table des symboles ******************/\n");
