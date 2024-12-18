@@ -1511,7 +1511,7 @@ yyreduce:
 #line 68 "syntaxique.y"
     {
         verifierDoubleDeclaration((yyvsp[(3) - (4)].str));
-        inserer((yyvsp[(3) - (4)].str), "idf", (yyvsp[(1) - (4)].str));
+        inserer((yyvsp[(3) - (4)].str), (yyvsp[(1) - (4)].str), "Variable simple", /*adresseMemoire*/ 0, /*taille*/ 0, "globale", "");
     ;}
     break;
 
@@ -1521,7 +1521,7 @@ yyreduce:
 #line 72 "syntaxique.y"
     {
         verifierDoubleDeclaration((yyvsp[(3) - (7)].str));
-        inserer((yyvsp[(3) - (7)].str), "idf", (yyvsp[(1) - (7)].str));
+        inserer((yyvsp[(3) - (7)].str), (yyvsp[(1) - (7)].str), "Tableau", /*adresseMemoire*/ 0, (yyvsp[(5) - (7)].entier), "globale", "");
     ;}
     break;
 
@@ -1531,7 +1531,7 @@ yyreduce:
 #line 80 "syntaxique.y"
     {
         verifierDoubleDeclaration((yyvsp[(4) - (7)].str));
-        inserer((yyvsp[(4) - (7)].str), "idf", (yyvsp[(2) - (7)].str));
+        inserer((yyvsp[(4) - (7)].str), (yyvsp[(2) - (7)].str), "Constante", /*adresseMemoire*/ 0, /*taille*/ 0, "globale", (yyvsp[(6) - (7)].entier));
     ;}
     break;
 

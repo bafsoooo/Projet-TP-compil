@@ -67,11 +67,11 @@ declarations:
 declaration:
     type DEUX_POINTS ID POINT_VIRGULE {
         verifierDoubleDeclaration($3);
-        inserer($3, "idf", $1);
+        inserer($3, $1, "Variable simple", /*adresseMemoire*/ 0, /*taille*/ 0, "globale", "");
     }
     | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE {
         verifierDoubleDeclaration($3);
-        inserer($3, "idf", $1);
+        inserer($3, $1, "Tableau", /*adresseMemoire*/ 0, $5, "globale", "");
     }
     | constant
     ;
@@ -79,7 +79,7 @@ declaration:
 constant:
     FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE {
         verifierDoubleDeclaration($4);
-        inserer($4, "idf", $2);
+        inserer($4, $2, "Constante", /*adresseMemoire*/ 0, /*taille*/ 0, "globale", $6);
     }
     ;
 
