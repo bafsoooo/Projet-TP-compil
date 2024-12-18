@@ -1,6 +1,9 @@
 %{
 #include "syntaxique.tab.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define _GNU_SOURCE
 #include "TS.h"
 extern YYSTYPE yylval;
 int nb_ligne = 1;
@@ -11,15 +14,9 @@ int nb_ligne = 1;
 "DEBUT"                    { printf("Token DEBUT trouvé\n"); return DEBUT; }
 "EXECUTION"                { printf("Token EXECUTION trouvé\n"); return EXECUTION; }
 "FIN"                      { printf("Token FIN trouvé\n"); return FIN; }
-"NUM"                      { printf("Token NUM trouvé\n");
-                                yylval.str=strdup(yytext); 
-                                return NUM;}
-"REAL"                     { printf("Token REAL trouvé\n"); 
-                            yylval.str=strdup(yytext); 
-                            return REAL; }
-"TEXT"                     { printf("Token TEXT trouvé\n"); 
-                                yylval.str=strdup(yytext); 
-                                return TEXT; }
+"NUM"                      { printf("Token NUM trouvé\n"); yylval.str=strdup(yytext); return NUM; }
+"REAL"                     { printf("Token REAL trouvé\n"); yylval.str=strdup(yytext); return REAL; }
+"TEXT"                     { printf("Token TEXT trouvé\n"); yylval.str=strdup(yytext); return TEXT; }
 "SI"                       { printf("Token SI trouvé\n"); return SI; }
 "SINON"                    { printf("Token SINON trouvé\n"); return SINON; }
 "ALORS"                    { printf("Token ALORS trouvé\n"); return ALORS; }
@@ -31,8 +28,8 @@ int nb_ligne = 1;
 "FIXE"                     { printf("Token FIXE trouvé\n"); return FIXE; }
 "affiche"                  { printf("Token AFFICHE trouvé\n"); return AFFICHE; }
 "lire"                     { printf("Token LIRE trouvé\n"); return LIRE; }
-[A-Za-z][A-Za-z0-9_éèêàùçàôâîù]{0,9}  { printf("Identifiant : %s\n", yytext); yylval.str=strdup(yytext); inserer(yytext,
-"idf");  return ID; }
+\"([^\"\\]|\\.)*\"       { printf("Chaîne de caractères : %s\n", yytext); yylval.str = strdup(yytext); return STRING; }
+[A-Za-z][A-Za-z0-9_éèêàùçàôâîù]{0,9}  { printf("Identifiant : %s\n", yytext); yylval.str=strdup(yytext); return ID; }
 [0-9]+                     { printf("Constante entière : %s\n", yytext); yylval.entier=atoi(yytext); return CST; }
 "=="                       { printf("Token EGAL trouvé\n"); return EGAL; }
 "!="                       { printf("Token DIFFERENT trouvé\n"); return DIFFERENT; }
@@ -56,18 +53,13 @@ int nb_ligne = 1;
 "]"                        { printf("Token CROCHET_FERMANT trouvé\n"); return CROCHET_FERMANT; }
 "{"                        { printf("Token ACCOLADE_OUVRANTE trouvé\n"); return ACCOLADE_OUVRANTE; }
 "}"                        { printf("Token ACCOLADE_FERMANTE trouvé\n"); return ACCOLADE_FERMANTE; }
-"\""                       { printf("Token GUILLEMENT trouvé\n"); return GUILLEMENT; }
-"##"                       { printf("Token DOUBLE_SHARP trouvé\n"); return DOUBLE_SHARP; }
-"\"([^\"\\]|\\.)*\""       { printf("Chaîne de caractères : %s\n", yytext); return STRING; }
 "--"([^#\n]*|#[^#])*"##"   { printf("Commentaire sur une seule ligne ignoré\n"); return COMMENT_SINGLE; }
-"{-([^{}]*|{[^-]*)*-}"     { printf("Commentaire multi-ligne ignoré\n"); return COMMENT_MULTI; }
-\"([^\"\\]\\.)*\"           { yylval.str = strdup(yytext); return STRING; }
+"\\{-"(.|\n)*?"-\\}" { printf("Commentaire multi-ligne ignoré\n"); /* Ignore */ }
 [ \t\r]+                   { /* Ignorer les espaces et tabulations */ }
 \n                         { nb_ligne++; printf("Nouvelle ligne (%d)\n", nb_ligne); }
 .                          { printf("Token non reconnu : %s\n", yytext); }
 
 %%
 
-int yywrap() {
-    return 1;
-}
+
+

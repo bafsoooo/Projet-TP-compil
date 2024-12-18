@@ -1,7 +1,11 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "syntaxique.tab.h"
+int yyerror(char *s);
+extern int yylex();
+extern int yylineno;
 
 // Fonction pour vérifier la division par zéro
 void check_division_by_zero(int value) {
@@ -33,11 +37,14 @@ void check_division_by_zero(int value) {
 %left PLUS MOINS
 %left MUL DIV
 
-%type <numvrg> NUM REAL
 %type <entier> CST
-%type <entier> arithmetique
+%type <str> ID STRING
+%type <numvrg> NUM REAL
+%type <str> type
 %type <entier> variables
-%type <str> ID 
+%type <entier> arithmetique
+%type <entier> comparaison
+
 
 %start program
 
@@ -46,7 +53,6 @@ void check_division_by_zero(int value) {
 program:
     DEBUT declarations EXECUTION block FIN {
         printf("Programme syntaxiquement correct.\n");
-        afficher();
         YYACCEPT;
     }
     ;
@@ -57,19 +63,27 @@ declarations:
     ;
 
 declaration:
-    type DEUX_POINTS ID POINT_VIRGULE
-    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE
+    type DEUX_POINTS ID POINT_VIRGULE {
+        inserer($3, "idf", $1);  // $1 contient le type (NUM, REAL, TEXT)
+    }
+    | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE {
+        char type_tab[25];
+        sprintf(type_tab, "%s[%d]", $1, $5);  // Pour les tableaux
+        inserer($3, "idf", type_tab);
+    }
     | constant
     ;
 
 constant:
-    FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE
+    FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE {
+        inserer($4, "idf", $2);
+    }
     ;
 
 type:
-    NUM
-    | REAL
-    | TEXT
+    NUM { $$ = "NUM"; }
+    | REAL { $$ = "REAL"; }
+    | TEXT { $$ = "TEXT"; }
     ;
 
 block:
@@ -109,12 +123,7 @@ variables:
 expression:
     arithmetique                     /* Niveau de base */
     | logique  /* Logiques produisent des expressions */   
-    | STRING separateurs             
-    ;
-separateurs:
-    DEUX_POINTS
-    |POINT
-    |POINT_VIRGULE
+;
 arithmetique:
     variables
     | arithmetique PLUS arithmetique  { $$ = $1 + $3; }
@@ -159,23 +168,25 @@ instTantQue:
     ;
 
 affiche:
-    AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PARENTHESE_FERMANTE
-    | AFFICHE PARENTHESE_OUVRANTE GUILLEMENT expression GUILLEMENT PLUS ID PARENTHESE_FERMANTE
+    AFFICHE PARENTHESE_OUVRANTE STRING PARENTHESE_FERMANTE POINT_VIRGULE
+    | AFFICHE PARENTHESE_OUVRANTE STRING VIRGULE ID PARENTHESE_FERMANTE POINT_VIRGULE
+    | AFFICHE PARENTHESE_OUVRANTE STRING VIRGULE STRING PARENTHESE_FERMANTE POINT_VIRGULE
     ;
 
+
 lire:
-    LIRE PARENTHESE_OUVRANTE variables PARENTHESE_FERMANTE
+    LIRE PARENTHESE_OUVRANTE ID PARENTHESE_FERMANTE POINT_VIRGULE 
     ;
 
 %%
-
-// Fonction principale
-int main() {
-    return yyparse();
-}
-
-// Gestion des erreurs syntaxiques
 int yyerror(char *s) {
     fprintf(stderr, "Erreur syntaxique : %s\n", s);
     return 0;
+}
+int main ()
+{
+    yyparse();
+    afficher();
+}
+int yywrap(){
 }

@@ -95,7 +95,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 15 "syntaxique.y"
+#line 19 "syntaxique.y"
 
     int entier;     // Pour les constantes entières
     char* str;      // Pour les chaînes de caractères
