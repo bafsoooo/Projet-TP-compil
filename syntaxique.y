@@ -44,6 +44,10 @@ void check_division_by_zero(int value) {
 %type <entier> variables
 %type <entier> arithmetique
 %type <entier> comparaison
+%type <entier> affectation
+
+
+
 
 
 %start program
@@ -64,19 +68,22 @@ declarations:
 
 declaration:
     type DEUX_POINTS ID POINT_VIRGULE {
-        inserer($3, "idf", $1);  // $1 contient le type (NUM, REAL, TEXT)
+        // Insertion d'une variable simple
+        inserer($3, $1, "Variable simple", 0, 0, "globale", "");
     }
     | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE {
-        char type_tab[25];
-        sprintf(type_tab, "%s[%d]", $1, $5);  // Pour les tableaux
-        inserer($3, "idf", type_tab);
+        // Insertion d'un tableau
+        inserer($3, $1, "Tableau", 0, $5, "globale", "");
     }
     | constant
     ;
 
 constant:
     FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE {
-        inserer($4, "idf", $2);
+        // Insertion d'une constante
+        char valeur[20];
+        sprintf(valeur, "%d", $6);
+        inserer($4, $2, "Constante", 0, 0, "globale", valeur);
     }
     ;
 
@@ -107,13 +114,21 @@ instruction:
     ;
 
 assignation:
-    ID ASSIGNATION expression POINT_VIRGULE
+    ID ASSIGNATION expression POINT_VIRGULE {
+        verifierDeclaration($1);  // Vérification de l'existence dans la table
+    }
     ;
 
-affectation:
+   affectation:
     ID AFFECTATION expression POINT_VIRGULE
+    {
+        printf("Affectation : %s = %d\n", $1, $3);
+    }
     | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression POINT_VIRGULE
-    ;
+    {
+        printf("Affectation : %s[%d] = %d\n", $1, $3, $6);
+    }
+;
 
 variables:
     CST { $$ = $1; }
@@ -169,24 +184,28 @@ instTantQue:
 
 affiche:
     AFFICHE PARENTHESE_OUVRANTE STRING PARENTHESE_FERMANTE POINT_VIRGULE
-    | AFFICHE PARENTHESE_OUVRANTE STRING VIRGULE ID PARENTHESE_FERMANTE POINT_VIRGULE
+    | AFFICHE PARENTHESE_OUVRANTE STRING VIRGULE ID PARENTHESE_FERMANTE POINT_VIRGULE {
+        verifierDeclaration($4);
+    }
     | AFFICHE PARENTHESE_OUVRANTE STRING VIRGULE STRING PARENTHESE_FERMANTE POINT_VIRGULE
     ;
-
-
 lire:
-    LIRE PARENTHESE_OUVRANTE ID PARENTHESE_FERMANTE POINT_VIRGULE 
+    LIRE PARENTHESE_OUVRANTE ID PARENTHESE_FERMANTE POINT_VIRGULE {
+        verifierDeclaration($3);
+    }
     ;
 
 %%
+
 int yyerror(char *s) {
     fprintf(stderr, "Erreur syntaxique : %s\n", s);
     return 0;
 }
-int main ()
-{
+
+int main() {
     yyparse();
-    afficher();
+    afficher();  // Afficher la table des symboles à la fin
+    return 0;
 }
-int yywrap(){
-}
+
+int yywrap() { return 1; }

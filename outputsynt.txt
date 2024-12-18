@@ -1,109 +1,16 @@
-Token DEBUT trouvé
-Nouvelle ligne (2)
-Nouvelle ligne (3)
-Token NUM trouvé
-Token DEUX_POINTS trouvé
-Identifiant : age
-Token POINT_VIRGULE trouvé
-Nouvelle ligne (4)
-Token REAL trouvé
-Token DEUX_POINTS trouvé
-Identifiant : salaire
-Token POINT_VIRGULE trouvé
-Nouvelle ligne (5)
-Token FIXE trouvé
-Token NUM trouvé
-Token DEUX_POINTS trouvé
-Identifiant : MAX_AGE
-Token ASSIGNATION trouvé
-Constante entière : 65
-Token POINT_VIRGULE trouvé
-Nouvelle ligne (6)
-Token EXECUTION trouvé
-Token ACCOLADE_OUVRANTE trouvé
-Nouvelle ligne (7)
-Token AFFICHE trouvé
-Token PARENTHESE_OUVRANTE trouvé
-Chaîne de caractères : "Entrez votre age :"
-Token PARENTHESE_FERMANTE trouvé
-Token POINT_VIRGULE trouvé
-Nouvelle ligne (8)
-Token SI trouvé
-Token PARENTHESE_OUVRANTE trouvé
-Identifiant : age
-Token INFERIEUR trouvé
-Identifiant : MAX_AGE
-Token ET_LOGIQUE trouvé
-Identifiant : age
-Token DIFFERENT trouvé
-Constante entière : 0
-Token PARENTHESE_FERMANTE trouvé
-Token ALORS trouvé
-Token ACCOLADE_OUVRANTE trouvé
-Nouvelle ligne (9)
-Token AFFICHE trouvé
-Token PARENTHESE_OUVRANTE trouvé
-Chaîne de caractères : "Vous pouvez encore travailler."
-Token PARENTHESE_FERMANTE trouvé
-Token POINT_VIRGULE trouvé
-Nouvelle ligne (10)
-Token ACCOLADE_FERMANTE trouvé
-Token SINON trouvé
-Token ACCOLADE_OUVRANTE trouvé
-Nouvelle ligne (11)
-Token AFFICHE trouvé
-Token PARENTHESE_OUVRANTE trouvé
-Chaîne de caractères : "Vous êtes en âge de retraite."
-Token PARENTHESE_FERMANTE trouvé
-Token POINT_VIRGULE trouvé
-Nouvelle ligne (12)
-Token ACCOLADE_FERMANTE trouvé
-Nouvelle ligne (13)
-Identifiant : compteur
-Token AFFECTATION trouvé
-Constante entière : 0
-Token POINT_VIRGULE trouvé
-Nouvelle ligne (14)
-Token TANTQUE trouvé
-Token PARENTHESE_OUVRANTE trouvé
-Identifiant : compteur
-Token INFERIEUR trouvé
-Constante entière : 5
-Token OU_LOGIQUE trouvé
-Identifiant : age
-Token DIFFERENT trouvé
-Constante entière : 0
-Token PARENTHESE_FERMANTE trouvé
-Token FAIRE trouvé
-Token ACCOLADE_OUVRANTE trouvé
-Nouvelle ligne (15)
-Token AFFICHE trouvé
-Token PARENTHESE_OUVRANTE trouvé
-Chaîne de caractères : "Compteur TANTQUE : "
-Token VIRGULE trouvé
-Identifiant : compteur
-Token PARENTHESE_FERMANTE trouvé
-Token POINT_VIRGULE trouvé
-Nouvelle ligne (16)
-Identifiant : compteur
-Token AFFECTATION trouvé
-Identifiant : compteur
-Token PLUS trouvé
-Constante entière : 1
-Token POINT_VIRGULE trouvé
-Nouvelle ligne (17)
-Token ACCOLADE_FERMANTE trouvé
-Nouvelle ligne (18)
-Nouvelle ligne (19)
-Token ACCOLADE_FERMANTE trouvé
-Nouvelle ligne (20)
-Token FIN trouvé
+Affichage : "Entrez votre age :"
+Affichage : "Vous pouvez encore travailler."
+Affichage : "Vous êtes en âge de retraite."
+Affectation : compteur = 0
+Affichage : "Compteur TANTQUE : ", compteur
+Affectation : compteur = 1
 Programme syntaxiquement correct.
 
 /*************** Table des symboles ******************/
 _____________________________________________________
-	| NomEntite  | CodeEntite  | TypeEntite
+| NomEntite  | TypeEntite  | Categorie  | AdresseMemoire | Taille | Portee | Valeur
 _____________________________________________________
-	|        age |          idf |         NUM |
-	|    MAX_AGE |          idf |         NUM |
-	|    salaire |          idf |        REAL |
+|        age |        NUM |Variable simple |             0 |     0 |globale |       |
+|     scores |        NUM |    Tableau |             0 |    10 |globale |       |
+|    MAX_AGE |        NUM |  Constante |             0 |     0 |globale |    65 |
+|    salaire |       REAL |Variable simple |             0 |     0 |globale |       |

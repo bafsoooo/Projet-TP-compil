@@ -414,7 +414,7 @@ union yyalloc
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  21
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  54
+#define YYNRULES  55
 /* YYNRULES -- Number of states.  */
 #define YYNSTATES  121
 
@@ -468,10 +468,10 @@ static const yytype_uint8 yyprhs[] =
 {
        0,     0,     3,     9,    12,    13,    18,    26,    28,    36,
       38,    40,    42,    46,    47,    50,    52,    54,    56,    58,
-      60,    62,    64,    66,    71,    76,    84,    86,    88,    90,
-      92,    94,    98,   102,   106,   110,   114,   116,   120,   124,
-     127,   131,   135,   137,   139,   141,   143,   145,   147,   154,
-     163,   170,   176,   184,   192
+      60,    62,    64,    66,    71,    72,    77,    85,    87,    89,
+      91,    93,    95,    99,   103,   107,   111,   115,   117,   121,
+     125,   128,   132,   136,   138,   140,   142,   144,   146,   148,
+     155,   164,   171,   177,   185,   193
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
@@ -484,30 +484,30 @@ static const yytype_int8 yyrhs[] =
       10,    -1,    43,    56,    44,    -1,    -1,    57,    56,    -1,
       47,    -1,    48,    -1,    59,    -1,    58,    -1,    66,    -1,
       67,    -1,    68,    -1,    69,    -1,    14,    25,    61,    35,
-      -1,    14,    30,    61,    35,    -1,    14,    41,    61,    42,
-      30,    61,    35,    -1,    15,    -1,    14,    -1,    62,    -1,
-      63,    -1,    60,    -1,    62,    31,    62,    -1,    62,    32,
-      62,    -1,    62,    33,    62,    -1,    62,    34,    62,    -1,
-      39,    62,    40,    -1,    64,    -1,    63,    17,    63,    -1,
-      63,    18,    63,    -1,    19,    63,    -1,    39,    63,    40,
-      -1,    62,    65,    62,    -1,    23,    -1,    24,    -1,    26,
-      -1,    27,    -1,    28,    -1,    29,    -1,     8,    39,    63,
-      40,     9,    55,    -1,     8,    39,    63,    40,     9,    55,
-      11,    55,    -1,    12,    39,    63,    40,    13,    55,    -1,
-      21,    39,    16,    40,    35,    -1,    21,    39,    16,    37,
-      14,    40,    35,    -1,    21,    39,    16,    37,    16,    40,
-      35,    -1,    22,    39,    14,    40,    35,    -1
+      -1,    -1,    14,    30,    61,    35,    -1,    14,    41,    61,
+      42,    30,    61,    35,    -1,    15,    -1,    14,    -1,    62,
+      -1,    63,    -1,    60,    -1,    62,    31,    62,    -1,    62,
+      32,    62,    -1,    62,    33,    62,    -1,    62,    34,    62,
+      -1,    39,    62,    40,    -1,    64,    -1,    63,    17,    63,
+      -1,    63,    18,    63,    -1,    19,    63,    -1,    39,    63,
+      40,    -1,    62,    65,    62,    -1,    23,    -1,    24,    -1,
+      26,    -1,    27,    -1,    28,    -1,    29,    -1,     8,    39,
+      63,    40,     9,    55,    -1,     8,    39,    63,    40,     9,
+      55,    11,    55,    -1,    12,    39,    63,    40,    13,    55,
+      -1,    21,    39,    16,    40,    35,    -1,    21,    39,    16,
+      37,    14,    40,    35,    -1,    21,    39,    16,    37,    16,
+      40,    35,    -1,    22,    39,    14,    40,    35,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    54,    54,    61,    62,    66,    69,    74,    78,    84,
-      85,    86,    90,    93,    95,    99,   100,   101,   102,   103,
-     104,   105,   106,   110,   114,   115,   119,   120,   124,   125,
-     128,   129,   130,   131,   132,   137,   141,   142,   143,   144,
-     145,   149,   153,   154,   155,   156,   157,   158,   162,   163,
-     167,   171,   172,   173,   178
+       0,    57,    57,    64,    65,    69,    73,    77,    81,    90,
+      91,    92,    96,    99,   101,   105,   106,   107,   108,   109,
+     110,   111,   112,   116,   121,   123,   127,   134,   135,   139,
+     140,   143,   144,   145,   146,   147,   152,   156,   157,   158,
+     159,   160,   164,   168,   169,   170,   171,   172,   173,   177,
+     178,   182,   186,   190,   194,   200
 };
 #endif
 
@@ -550,10 +550,10 @@ static const yytype_uint8 yyr1[] =
 {
        0,    49,    50,    51,    51,    52,    52,    52,    53,    54,
       54,    54,    55,    56,    56,    57,    57,    57,    57,    57,
-      57,    57,    57,    58,    59,    59,    60,    60,    61,    61,
-      62,    62,    62,    62,    62,    62,    63,    63,    63,    63,
-      63,    64,    65,    65,    65,    65,    65,    65,    66,    66,
-      67,    68,    68,    68,    69
+      57,    57,    57,    58,    59,    59,    59,    60,    60,    61,
+      61,    62,    62,    62,    62,    62,    62,    63,    63,    63,
+      63,    63,    64,    65,    65,    65,    65,    65,    65,    66,
+      66,    67,    68,    68,    68,    69
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
@@ -561,10 +561,10 @@ static const yytype_uint8 yyr2[] =
 {
        0,     2,     5,     2,     0,     4,     7,     1,     7,     1,
        1,     1,     3,     0,     2,     1,     1,     1,     1,     1,
-       1,     1,     1,     4,     4,     7,     1,     1,     1,     1,
-       1,     3,     3,     3,     3,     3,     1,     3,     3,     2,
-       3,     3,     1,     1,     1,     1,     1,     1,     6,     8,
-       6,     5,     7,     7,     5
+       1,     1,     1,     4,     0,     4,     7,     1,     1,     1,
+       1,     1,     3,     3,     3,     3,     3,     1,     3,     3,
+       2,     3,     3,     1,     1,     1,     1,     1,     1,     6,
+       8,     6,     5,     7,     7,     5
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -576,15 +576,15 @@ static const yytype_uint8 yydefact[] =
        3,     7,     0,    13,     0,     0,     0,     0,     0,     0,
        0,     0,    15,    16,     0,    13,    18,    17,    19,    20,
       21,    22,     2,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,    12,    14,     0,     5,     0,    27,    26,     0,
-       0,    30,     0,     0,    36,     0,     0,    28,    29,     0,
-       0,     0,     0,     0,     0,    39,     0,     0,    42,    43,
-      44,    45,    46,    47,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    23,    24,     0,     0,     0,     0,     0,
-       0,    35,    40,     0,    31,    32,    33,    34,    41,    37,
-      38,     0,     0,     0,     0,     0,    51,    54,     8,     6,
-       0,    48,    50,     0,     0,     0,     0,    25,    52,    53,
-      49
+       0,     0,    12,    14,     0,     5,     0,    28,    27,     0,
+       0,    31,     0,     0,    37,     0,     0,    29,    30,     0,
+       0,     0,     0,     0,     0,    40,     0,     0,    43,    44,
+      45,    46,    47,    48,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,    23,    25,     0,     0,     0,     0,     0,
+       0,    36,    41,     0,    32,    33,    34,    35,    42,    38,
+      39,     0,     0,     0,     0,     0,    52,    55,     8,     6,
+       0,    49,    51,     0,     0,     0,     0,    26,    53,    54,
+      50
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -1494,7 +1494,7 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 54 "syntaxique.y"
+#line 57 "syntaxique.y"
     {
         printf("Programme syntaxiquement correct.\n");
         YYACCEPT;
@@ -1504,92 +1504,122 @@ yyreduce:
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 66 "syntaxique.y"
+#line 69 "syntaxique.y"
     {
-        inserer((yyvsp[(3) - (4)].str), "idf", (yyvsp[(1) - (4)].str));  // $1 contient le type (NUM, REAL, TEXT)
+        // Insertion d'une variable simple
+        inserer((yyvsp[(3) - (4)].str), (yyvsp[(1) - (4)].str), "Variable simple", 0, 0, "globale", "");
     ;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 69 "syntaxique.y"
+#line 73 "syntaxique.y"
     {
-        char type_tab[25];
-        sprintf(type_tab, "%s[%d]", (yyvsp[(1) - (7)].str), (yyvsp[(5) - (7)].entier));  // Pour les tableaux
-        inserer((yyvsp[(3) - (7)].str), "idf", type_tab);
+        // Insertion d'un tableau
+        inserer((yyvsp[(3) - (7)].str), (yyvsp[(1) - (7)].str), "Tableau", 0, (yyvsp[(5) - (7)].entier), "globale", "");
     ;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 78 "syntaxique.y"
+#line 81 "syntaxique.y"
     {
-        inserer((yyvsp[(4) - (7)].str), "idf", (yyvsp[(2) - (7)].str));
+        // Insertion d'une constante
+        char valeur[20];
+        sprintf(valeur, "%d", (yyvsp[(6) - (7)].entier));
+        inserer((yyvsp[(4) - (7)].str), (yyvsp[(2) - (7)].str), "Constante", 0, 0, "globale", valeur);
     ;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 84 "syntaxique.y"
+#line 90 "syntaxique.y"
     { (yyval.str) = "NUM"; ;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 85 "syntaxique.y"
+#line 91 "syntaxique.y"
     { (yyval.str) = "REAL"; ;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 86 "syntaxique.y"
+#line 92 "syntaxique.y"
     { (yyval.str) = "TEXT"; ;}
+    break;
+
+  case 23:
+
+/* Line 1455 of yacc.c  */
+#line 116 "syntaxique.y"
+    {
+        verifierDeclaration((yyvsp[(1) - (4)].str));  // Vérification de l'existence dans la table
+    ;}
+    break;
+
+  case 25:
+
+/* Line 1455 of yacc.c  */
+#line 124 "syntaxique.y"
+    {
+        printf("Affectation : %s = %d\n", (yyvsp[(1) - (4)].str), (yyvsp[(3) - (4)].entier));
+    ;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 119 "syntaxique.y"
-    { (yyval.entier) = (yyvsp[(1) - (1)].entier); ;}
+#line 128 "syntaxique.y"
+    {
+        printf("Affectation : %s[%d] = %d\n", (yyvsp[(1) - (7)].str), (yyvsp[(3) - (7)].entier), (yyvsp[(6) - (7)].entier));
+    ;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 120 "syntaxique.y"
-    { (yyval.entier) = 0; ;}
+#line 134 "syntaxique.y"
+    { (yyval.entier) = (yyvsp[(1) - (1)].entier); ;}
     break;
 
-  case 31:
+  case 28:
 
 /* Line 1455 of yacc.c  */
-#line 129 "syntaxique.y"
-    { (yyval.entier) = (yyvsp[(1) - (3)].entier) + (yyvsp[(3) - (3)].entier); ;}
+#line 135 "syntaxique.y"
+    { (yyval.entier) = 0; ;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 130 "syntaxique.y"
-    { (yyval.entier) = (yyvsp[(1) - (3)].entier) - (yyvsp[(3) - (3)].entier); ;}
+#line 144 "syntaxique.y"
+    { (yyval.entier) = (yyvsp[(1) - (3)].entier) + (yyvsp[(3) - (3)].entier); ;}
     break;
 
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 131 "syntaxique.y"
-    { (yyval.entier) = (yyvsp[(1) - (3)].entier) * (yyvsp[(3) - (3)].entier); ;}
+#line 145 "syntaxique.y"
+    { (yyval.entier) = (yyvsp[(1) - (3)].entier) - (yyvsp[(3) - (3)].entier); ;}
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 132 "syntaxique.y"
+#line 146 "syntaxique.y"
+    { (yyval.entier) = (yyvsp[(1) - (3)].entier) * (yyvsp[(3) - (3)].entier); ;}
+    break;
+
+  case 35:
+
+/* Line 1455 of yacc.c  */
+#line 147 "syntaxique.y"
     {
         check_division_by_zero((yyvsp[(3) - (3)].entier));
         (yyval.entier) = (yyvsp[(1) - (3)].entier) / (yyvsp[(3) - (3)].entier);
@@ -1597,17 +1627,53 @@ yyreduce:
     ;}
     break;
 
-  case 35:
+  case 36:
 
 /* Line 1455 of yacc.c  */
-#line 137 "syntaxique.y"
+#line 152 "syntaxique.y"
     { (yyval.entier) = (yyvsp[(2) - (3)].entier); ;}
+    break;
+
+  case 52:
+
+/* Line 1455 of yacc.c  */
+#line 187 "syntaxique.y"
+    {
+        printf("Affichage : %s\n", (yyvsp[(3) - (5)].str));
+    ;}
+    break;
+
+  case 53:
+
+/* Line 1455 of yacc.c  */
+#line 191 "syntaxique.y"
+    {
+        printf("Affichage : %s, %s\n", (yyvsp[(3) - (7)].str), (yyvsp[(5) - (7)].str));
+    ;}
+    break;
+
+  case 54:
+
+/* Line 1455 of yacc.c  */
+#line 195 "syntaxique.y"
+    {
+        printf("Affichage : %s, %s\n", (yyvsp[(3) - (7)].str), (yyvsp[(5) - (7)].str));
+    ;}
+    break;
+
+  case 55:
+
+/* Line 1455 of yacc.c  */
+#line 200 "syntaxique.y"
+    {
+        verifierDeclaration((yyvsp[(3) - (5)].str));
+    ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1611 "syntaxique.tab.c"
+#line 1677 "syntaxique.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1819,16 +1885,18 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 181 "syntaxique.y"
+#line 205 "syntaxique.y"
+
 
 int yyerror(char *s) {
     fprintf(stderr, "Erreur syntaxique : %s\n", s);
     return 0;
 }
-int main ()
-{
+
+int main() {
     yyparse();
-    afficher();
+    afficher();  // Afficher la table des symboles à la fin
+    return 0;
 }
-int yywrap(){
-}
+
+int yywrap() { return 1; }

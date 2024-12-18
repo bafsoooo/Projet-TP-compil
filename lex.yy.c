@@ -698,237 +698,237 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 14 "lexical.l"
-{ printf("Token DEBUT trouvé\n"); return DEBUT; }
+{ return DEBUT; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 15 "lexical.l"
-{ printf("Token EXECUTION trouvé\n"); return EXECUTION; }
+{ return EXECUTION; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 16 "lexical.l"
-{ printf("Token FIN trouvé\n"); return FIN; }
+{ return FIN; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 17 "lexical.l"
-{ printf("Token NUM trouvé\n"); yylval.str=strdup(yytext); return NUM; }
+{ yylval.str = strdup(yytext); return NUM; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 18 "lexical.l"
-{ printf("Token REAL trouvé\n"); yylval.str=strdup(yytext); return REAL; }
+{ yylval.str = strdup(yytext); return REAL; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 19 "lexical.l"
-{ printf("Token TEXT trouvé\n"); yylval.str=strdup(yytext); return TEXT; }
+{ yylval.str = strdup(yytext); return TEXT; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 20 "lexical.l"
-{ printf("Token SI trouvé\n"); return SI; }
+{ return SI; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 21 "lexical.l"
-{ printf("Token SINON trouvé\n"); return SINON; }
+{ return SINON; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 22 "lexical.l"
-{ printf("Token ALORS trouvé\n"); return ALORS; }
+{ return ALORS; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 23 "lexical.l"
-{ printf("Token TANTQUE trouvé\n"); return TANTQUE; }
+{ return TANTQUE; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 24 "lexical.l"
-{ printf("Token FAIRE trouvé\n"); return FAIRE; }
+{ return FAIRE; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 25 "lexical.l"
-{ printf("Token ET_LOGIQUE trouvé\n"); return ET_LOGIQUE; }
+{ return ET_LOGIQUE; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 26 "lexical.l"
-{ printf("Token OU_LOGIQUE trouvé\n"); return OU_LOGIQUE; }
+{ return OU_LOGIQUE; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 27 "lexical.l"
-{ printf("Token NEGATION trouvé\n"); return NEGATION; }
+{ return NEGATION; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 28 "lexical.l"
-{ printf("Token FIXE trouvé\n"); return FIXE; }
+{ return FIXE; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 29 "lexical.l"
-{ printf("Token AFFICHE trouvé\n"); return AFFICHE; }
+{ return AFFICHE; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 30 "lexical.l"
-{ printf("Token LIRE trouvé\n"); return LIRE; }
+{ return LIRE; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 31 "lexical.l"
-{ printf("Chaîne de caractères : %s\n", yytext); yylval.str = strdup(yytext); return STRING; }
+{ yylval.str = strdup(yytext); return STRING; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 32 "lexical.l"
-{ printf("Identifiant : %s\n", yytext); yylval.str=strdup(yytext); return ID; }
+{ yylval.str = strdup(yytext); return ID; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 33 "lexical.l"
-{ printf("Constante entière : %s\n", yytext); yylval.entier=atoi(yytext); return CST; }
+{ yylval.entier = atoi(yytext); return CST; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 34 "lexical.l"
-{ printf("Token EGAL trouvé\n"); return EGAL; }
+{ return EGAL; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 35 "lexical.l"
-{ printf("Token DIFFERENT trouvé\n"); return DIFFERENT; }
+{ return DIFFERENT; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 36 "lexical.l"
-{ printf("Token ASSIGNATION trouvé\n"); return ASSIGNATION; }
+{ return ASSIGNATION; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 37 "lexical.l"
-{ printf("Token SUPERIEUR trouvé\n"); return SUPERIEUR; }
+{ return SUPERIEUR; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 38 "lexical.l"
-{ printf("Token SUP_EGAL trouvé\n"); return SUP_EGAL; }
+{ return SUP_EGAL; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 39 "lexical.l"
-{ printf("Token INFERIEUR trouvé\n"); return INFERIEUR; }
+{ return INFERIEUR; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 40 "lexical.l"
-{ printf("Token INF_EGAL trouvé\n"); return INF_EGAL; }
+{ return INF_EGAL; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 41 "lexical.l"
-{ printf("Token AFFECTATION trouvé\n"); return AFFECTATION; }
+{ return AFFECTATION; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 42 "lexical.l"
-{ printf("Token PLUS trouvé\n"); return PLUS; }
+{ return PLUS; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 43 "lexical.l"
-{ printf("Token MOINS trouvé\n"); return MOINS; }
+{ return MOINS; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 44 "lexical.l"
-{ printf("Token MUL trouvé\n"); return MUL; }
+{ return MUL; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 45 "lexical.l"
-{ printf("Token DIV trouvé\n"); return DIV; }
+{ return DIV; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 46 "lexical.l"
-{ printf("Token POINT_VIRGULE trouvé\n"); return POINT_VIRGULE; }
+{ return POINT_VIRGULE; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 47 "lexical.l"
-{ printf("Token DEUX_POINTS trouvé\n"); return DEUX_POINTS; }
+{ return DEUX_POINTS; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 48 "lexical.l"
-{ printf("Token VIRGULE trouvé\n"); return VIRGULE; }
+{ return VIRGULE; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 49 "lexical.l"
-{ printf("Token POINT trouvé\n"); return POINT; }
+{ return POINT; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 50 "lexical.l"
-{ printf("Token PARENTHESE_OUVRANTE trouvé\n"); return PARENTHESE_OUVRANTE; }
+{ return PARENTHESE_OUVRANTE; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 51 "lexical.l"
-{ printf("Token PARENTHESE_FERMANTE trouvé\n"); return PARENTHESE_FERMANTE; }
+{ return PARENTHESE_FERMANTE; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 52 "lexical.l"
-{ printf("Token CROCHET_OUVRANT trouvé\n"); return CROCHET_OUVRANT; }
+{ return CROCHET_OUVRANT; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 53 "lexical.l"
-{ printf("Token CROCHET_FERMANT trouvé\n"); return CROCHET_FERMANT; }
+{ return CROCHET_FERMANT; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 54 "lexical.l"
-{ printf("Token ACCOLADE_OUVRANTE trouvé\n"); return ACCOLADE_OUVRANTE; }
+{ return ACCOLADE_OUVRANTE; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 55 "lexical.l"
-{ printf("Token ACCOLADE_FERMANTE trouvé\n"); return ACCOLADE_FERMANTE; }
+{ return ACCOLADE_FERMANTE; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 56 "lexical.l"
-{ printf("Commentaire sur une seule ligne ignoré\n"); return COMMENT_SINGLE; }
+{ return COMMENT_SINGLE; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 57 "lexical.l"
-{ printf("Commentaire multi-ligne ignoré\n"); /* Ignore */ }
+{ /* Ignore multi-line comment */ }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 58 "lexical.l"
-{ /* Ignorer les espaces et tabulations */ }
+{ /* Ignore spaces and tabs */ }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 59 "lexical.l"
-{ nb_ligne++; printf("Nouvelle ligne (%d)\n", nb_ligne); }
+{ nb_ligne++; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 60 "lexical.l"
-{ printf("Token non reconnu : %s\n", yytext); }
+{ /* Ignore unrecognized tokens */ }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP

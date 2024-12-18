@@ -1,20 +1,9 @@
 DEBUT
---Déclaration des variables ##
-NUM : age
-REAL : salaire
-FIXE NUM : MAX_AGE = 65
-EXECUTION {
-affiche("Entrez votre âge :")
-lire(age)
-SI (age < MAX_AGE) ALORS {
-affiche("Vous pouvez encore travailler.")
-} SINON {
-affiche("Vous êtes en âge de retraite.")
-}
-compteur <- 0
-TANTQUE (compteur < 5) FAIRE {
-affiche("Compteur TANTQUE : ", compteur)
-compteur <- compteur + 1
-}
+
+    NUM : age ;
+    REAL : age ;  // Double déclaration
+
+    EXECUTION {
+    
 }
 FIN
