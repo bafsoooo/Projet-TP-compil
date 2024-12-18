@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "syntaxique.tab.h"
 #include "TS.h"
+
 // Fonction pour vérifier la division par zéro
 void check_division_by_zero(int value) {
     if (value == 0) {
@@ -14,7 +15,6 @@ void check_division_by_zero(int value) {
 extern int nb_ligne;
 extern int nb_colonne;
 void yyerror(const char *msg);
-
 %}
 
 %union {
@@ -42,10 +42,11 @@ void yyerror(const char *msg);
 %type <str> ID STRING
 %type <numvrg> NUM REAL
 %type <str> type
-%type <entier> variables
-%type <entier> arithmetique
-%type <entier> logique
-%type <entier> comparaison
+%type <str> expression
+%type <str> arithmetique
+%type <str> logique
+%type <str> comparaison
+%type <str> variables
 
 %start program
 
@@ -111,6 +112,7 @@ instruction:
 assignation:
     ID ASSIGNATION expression POINT_VIRGULE {
         verifierDeclaration($1);
+        verifierModificationConstante($1);
         TypeTS* var = recherche($1);
         verifierCompatibiliteType(var->TypeEntite, $3);
     }
@@ -119,11 +121,14 @@ assignation:
 affectation:
     ID AFFECTATION expression POINT_VIRGULE {
         verifierDeclaration($1);
+        verifierModificationConstante($1);
         TypeTS* var = recherche($1);
         verifierCompatibiliteType(var->TypeEntite, $3);
     }
     | ID CROCHET_OUVRANT expression CROCHET_FERMANT AFFECTATION expression POINT_VIRGULE {
         verifierDeclaration($1);
+        verifierModificationConstante($1);
+        verifierDepassementTailleTableau($1, $3);
         TypeTS* var = recherche($1);
         verifierCompatibiliteType(var->TypeEntite, $6);
     }
@@ -135,14 +140,17 @@ variables:
     ;
 
 expression:
-    arithmetique                     /* Niveau de base */
-    | logique  /* Logiques produisent des expressions */   
-    | STRING separateurs             
+    arithmetique
+    | logique
+    | STRING separateurs
     ;
+
 separateurs:
     DEUX_POINTS
-    |POINT
-    |POINT_VIRGULE
+    | POINT
+    | POINT_VIRGULE
+    ;
+
 arithmetique:
     variables
     | arithmetique PLUS arithmetique { verifierCompatibiliteType($1, $3); $$ = $1; }
@@ -201,10 +209,9 @@ lire:
 void yyerror(const char *msg) {
     fprintf(stderr, "Erreur Syntaxique à la ligne %d, colonne %d: %s\n", nb_ligne, nb_colonne, msg);
 }
-main ()
-{
+
+int main() {
     yyparse();
     afficher();
-}
-yywrap(){
+    return 0;
 }

@@ -7,10 +7,14 @@
 
 // Structure de la table de symboles
 typedef struct TypeTS {
-    char NomEntite[20];
-    char CodeEntite[20];
-    char TypeEntite[20];
-    struct TypeTS* suivant; // Pointeur vers le prochain élément en cas de collision
+    char NomEntite[20];       // Nom du symbole
+    char TypeEntite[20];      // Type du symbole (int, float, char, etc.)
+    char Categorie[20];       // Catégorie du symbole (Variable simple, Constante, Tableau, Fonction)
+    int AdresseMemoire;       // Adresse mémoire (offset)
+    int Taille;               // Taille (pour les tableaux)
+    char Portee[20];          // Portée (locale, globale, etc.)
+    char Valeur[50];          // Valeur (si constante ou variable initialisée)
+    struct TypeTS* suivant;   // Pointeur vers le prochain élément en cas de collision
 } TypeTS;
 
 // Table de hachage
@@ -39,13 +43,17 @@ TypeTS* recherche(char* entite) {
 }
 
 // Insertion dans la table de hachage
-void inserer(char* entite, char* code, char* type) {
+void inserer(char* entite, char* type, char* categorie, int adresseMemoire, int taille, char* portee, char* valeur) {
     if (recherche(entite) == NULL) {
         unsigned int index = hash(entite);
         TypeTS* nouvelElement = (TypeTS*)malloc(sizeof(TypeTS));
         strcpy(nouvelElement->NomEntite, entite);
-        strcpy(nouvelElement->CodeEntite, code);
         strcpy(nouvelElement->TypeEntite, type);
+        strcpy(nouvelElement->Categorie, categorie);
+        nouvelElement->AdresseMemoire = adresseMemoire;
+        nouvelElement->Taille = taille;
+        strcpy(nouvelElement->Portee, portee);
+        strcpy(nouvelElement->Valeur, valeur);
         nouvelElement->suivant = table[index];
         table[index] = nouvelElement;
     }
@@ -82,16 +90,38 @@ void verifierCompatibiliteType(char* type1, char* type2) {
     }
 }
 
+// Vérification de la modification d'une constante
+void verifierModificationConstante(char* entite) {
+    TypeTS* element = recherche(entite);
+    if (element != NULL && strcmp(element->Categorie, "Constante") == 0) {
+        fprintf(stderr, "Erreur sémantique : Modification de la valeur de la constante '%s'\n", entite);
+        exit(EXIT_FAILURE);
+    }
+}
+
+// Vérification du dépassement de la taille d'un tableau
+void verifierDepassementTailleTableau(char* entite, int index) {
+    TypeTS* element = recherche(entite);
+    if (element != NULL && strcmp(element->Categorie, "Tableau") == 0) {
+        if (index >= element->Taille) {
+            fprintf(stderr, "Erreur sémantique : Dépassement de la taille du tableau '%s' (index %d, taille %d)\n", entite, index, element->Taille);
+            exit(EXIT_FAILURE);
+        }
+    }
+}
+
 // Affichage de la table de hachage
 void afficher() {
     printf("\n/*************** Table des symboles ******************/\n");
     printf("_____________________________________________________\n");
-    printf("\t| NomEntite  | CodeEntite  | TypeEntite\n");
+    printf("| NomEntite  | TypeEntite  | Categorie  | AdresseMemoire | Taille | Portee | Valeur\n");
     printf("_____________________________________________________\n");
     for (int i = 0; i < TAILLE_TABLE; i++) {
         TypeTS* courant = table[i];
         while (courant != NULL) {
-            printf("\t|%11s |%13s |%12s |\n", courant->NomEntite, courant->CodeEntite, courant->TypeEntite);
+            printf("|%11s |%11s |%11s |%14d |%6d |%7s |%6s |\n", 
+                   courant->NomEntite, courant->TypeEntite, courant->Categorie, 
+                   courant->AdresseMemoire, courant->Taille, courant->Portee, courant->Valeur);
             courant = courant->suivant;
         }
     }
