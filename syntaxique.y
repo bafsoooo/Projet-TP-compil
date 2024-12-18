@@ -1,10 +1,14 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "syntaxique.tab.h"
 #include "TS.h"
 
-// Fonction pour vérifier la division par zéro
+extern int yylineno;
+extern int nb_ligne;
+extern int nb_colonne;
+
 void check_division_by_zero(int value) {
     if (value == 0) {
         fprintf(stderr, "Erreur: Division par zéro\n");
@@ -12,8 +16,6 @@ void check_division_by_zero(int value) {
     }
 }
 
-extern int nb_ligne;
-extern int nb_colonne;
 void yyerror(const char *msg);
 %}
 
@@ -67,11 +69,11 @@ declarations:
 declaration:
     type DEUX_POINTS ID POINT_VIRGULE {
         verifierDoubleDeclaration($3);
-        inserer($3, $1, "Variable simple", /*adresseMemoire*/ 0, /*taille*/ 0, "globale", "");
+        inserer($3, $1, "Variable simple", 0, 0, "globale", "");
     }
     | type DEUX_POINTS ID CROCHET_OUVRANT CST CROCHET_FERMANT POINT_VIRGULE {
         verifierDoubleDeclaration($3);
-        inserer($3, $1, "Tableau", /*adresseMemoire*/ 0, $5, "globale", "");
+        inserer($3, $1, "Tableau", 0, $5, "globale", "");
     }
     | constant
     ;
@@ -79,7 +81,9 @@ declaration:
 constant:
     FIXE type DEUX_POINTS ID ASSIGNATION CST POINT_VIRGULE {
         verifierDoubleDeclaration($4);
-        inserer($4, $2, "Constante", /*adresseMemoire*/ 0, /*taille*/ 0, "globale", $6);
+        char valeur[20];
+        sprintf(valeur, "%d", $6);
+        inserer($4, $2, "Constante", 0, 0, "globale", valeur);
     }
     ;
 
@@ -207,7 +211,7 @@ lire:
 %%
 
 void yyerror(const char *msg) {
-    fprintf(stderr, "Erreur Syntaxique à la ligne %d, colonne %d: %s\n", nb_ligne, nb_colonne, msg);
+    fprintf(stderr, "Erreur Syntaxique à la ligne %d, colonne %d: %s\n", yylineno, nb_colonne, msg);
 }
 
 int main() {

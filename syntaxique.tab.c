@@ -72,10 +72,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "syntaxique.tab.h"
 #include "TS.h"
 
-// Fonction pour vérifier la division par zéro
+extern int yylineno;
+extern int nb_ligne;
+extern int nb_colonne;
+
 void check_division_by_zero(int value) {
     if (value == 0) {
         fprintf(stderr, "Erreur: Division par zéro\n");
@@ -83,13 +87,11 @@ void check_division_by_zero(int value) {
     }
 }
 
-extern int nb_ligne;
-extern int nb_colonne;
 void yyerror(const char *msg);
 
 
 /* Line 189 of yacc.c  */
-#line 93 "syntaxique.tab.c"
+#line 95 "syntaxique.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -172,7 +174,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 20 "syntaxique.y"
+#line 22 "syntaxique.y"
 
     int entier;     // Pour les constantes entières
     char* str;      // Pour les chaînes de caractères
@@ -181,7 +183,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 185 "syntaxique.tab.c"
+#line 187 "syntaxique.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -193,7 +195,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 197 "syntaxique.tab.c"
+#line 199 "syntaxique.tab.c"
 
 #ifdef short
 # undef short
@@ -503,12 +505,12 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    56,    56,    63,    64,    68,    72,    76,    80,    87,
-      88,    89,    93,    96,    98,   102,   103,   104,   105,   106,
-     107,   108,   109,   113,   122,   128,   138,   139,   143,   144,
-     145,   149,   150,   151,   155,   156,   157,   158,   159,   165,
-     169,   170,   171,   172,   173,   177,   181,   182,   183,   184,
-     185,   186,   190,   191,   195,   199,   200,   204
+       0,    58,    58,    65,    66,    70,    74,    78,    82,    91,
+      92,    93,    97,   100,   102,   106,   107,   108,   109,   110,
+     111,   112,   113,   117,   126,   132,   142,   143,   147,   148,
+     149,   153,   154,   155,   159,   160,   161,   162,   163,   169,
+     173,   174,   175,   176,   177,   181,   185,   186,   187,   188,
+     189,   190,   194,   195,   199,   203,   204,   208
 };
 #endif
 
@@ -1498,7 +1500,7 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 56 "syntaxique.y"
+#line 58 "syntaxique.y"
     {
         printf("Programme syntaxiquement correct.\n");
         YYACCEPT;
@@ -1508,58 +1510,60 @@ yyreduce:
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 68 "syntaxique.y"
+#line 70 "syntaxique.y"
     {
         verifierDoubleDeclaration((yyvsp[(3) - (4)].str));
-        inserer((yyvsp[(3) - (4)].str), (yyvsp[(1) - (4)].str), "Variable simple", /*adresseMemoire*/ 0, /*taille*/ 0, "globale", "");
+        inserer((yyvsp[(3) - (4)].str), (yyvsp[(1) - (4)].str), "Variable simple", 0, 0, "globale", "");
     ;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 72 "syntaxique.y"
+#line 74 "syntaxique.y"
     {
         verifierDoubleDeclaration((yyvsp[(3) - (7)].str));
-        inserer((yyvsp[(3) - (7)].str), (yyvsp[(1) - (7)].str), "Tableau", /*adresseMemoire*/ 0, (yyvsp[(5) - (7)].entier), "globale", "");
+        inserer((yyvsp[(3) - (7)].str), (yyvsp[(1) - (7)].str), "Tableau", 0, (yyvsp[(5) - (7)].entier), "globale", "");
     ;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 80 "syntaxique.y"
+#line 82 "syntaxique.y"
     {
         verifierDoubleDeclaration((yyvsp[(4) - (7)].str));
-        inserer((yyvsp[(4) - (7)].str), (yyvsp[(2) - (7)].str), "Constante", /*adresseMemoire*/ 0, /*taille*/ 0, "globale", (yyvsp[(6) - (7)].entier));
+        char valeur[20];
+        sprintf(valeur, "%d", (yyvsp[(6) - (7)].entier));
+        inserer((yyvsp[(4) - (7)].str), (yyvsp[(2) - (7)].str), "Constante", 0, 0, "globale", valeur);
     ;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 87 "syntaxique.y"
+#line 91 "syntaxique.y"
     { (yyval.str) = "NUM"; ;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 88 "syntaxique.y"
+#line 92 "syntaxique.y"
     { (yyval.str) = "REAL"; ;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 89 "syntaxique.y"
+#line 93 "syntaxique.y"
     { (yyval.str) = "TEXT"; ;}
     break;
 
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 113 "syntaxique.y"
+#line 117 "syntaxique.y"
     {
         verifierDeclaration((yyvsp[(1) - (4)].str));
         verifierModificationConstante((yyvsp[(1) - (4)].str));
@@ -1571,7 +1575,7 @@ yyreduce:
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 122 "syntaxique.y"
+#line 126 "syntaxique.y"
     {
         verifierDeclaration((yyvsp[(1) - (4)].str));
         verifierModificationConstante((yyvsp[(1) - (4)].str));
@@ -1583,7 +1587,7 @@ yyreduce:
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 128 "syntaxique.y"
+#line 132 "syntaxique.y"
     {
         verifierDeclaration((yyvsp[(1) - (7)].str));
         verifierModificationConstante((yyvsp[(1) - (7)].str));
@@ -1596,42 +1600,42 @@ yyreduce:
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 138 "syntaxique.y"
+#line 142 "syntaxique.y"
     { (yyval.str) = "NUM"; ;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 139 "syntaxique.y"
+#line 143 "syntaxique.y"
     { verifierDeclaration((yyvsp[(1) - (1)].str)); TypeTS* var = recherche((yyvsp[(1) - (1)].str)); (yyval.str) = var->TypeEntite; ;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 156 "syntaxique.y"
+#line 160 "syntaxique.y"
     { verifierCompatibiliteType((yyvsp[(1) - (3)].str), (yyvsp[(3) - (3)].str)); (yyval.str) = (yyvsp[(1) - (3)].str); ;}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 157 "syntaxique.y"
+#line 161 "syntaxique.y"
     { verifierCompatibiliteType((yyvsp[(1) - (3)].str), (yyvsp[(3) - (3)].str)); (yyval.str) = (yyvsp[(1) - (3)].str); ;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 158 "syntaxique.y"
+#line 162 "syntaxique.y"
     { verifierCompatibiliteType((yyvsp[(1) - (3)].str), (yyvsp[(3) - (3)].str)); (yyval.str) = (yyvsp[(1) - (3)].str); ;}
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 159 "syntaxique.y"
+#line 163 "syntaxique.y"
     {
         check_division_by_zero((yyvsp[(3) - (3)].str));
         verifierCompatibiliteType((yyvsp[(1) - (3)].str), (yyvsp[(3) - (3)].str));
@@ -1643,49 +1647,49 @@ yyreduce:
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 165 "syntaxique.y"
+#line 169 "syntaxique.y"
     { (yyval.str) = (yyvsp[(2) - (3)].str); ;}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 170 "syntaxique.y"
+#line 174 "syntaxique.y"
     { verifierCompatibiliteType((yyvsp[(1) - (3)].str), (yyvsp[(3) - (3)].str)); (yyval.str) = (yyvsp[(1) - (3)].str); ;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 171 "syntaxique.y"
+#line 175 "syntaxique.y"
     { verifierCompatibiliteType((yyvsp[(1) - (3)].str), (yyvsp[(3) - (3)].str)); (yyval.str) = (yyvsp[(1) - (3)].str); ;}
     break;
 
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 172 "syntaxique.y"
+#line 176 "syntaxique.y"
     { (yyval.str) = (yyvsp[(2) - (2)].str); ;}
     break;
 
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 173 "syntaxique.y"
+#line 177 "syntaxique.y"
     { (yyval.str) = (yyvsp[(2) - (3)].str); ;}
     break;
 
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 177 "syntaxique.y"
+#line 181 "syntaxique.y"
     { verifierCompatibiliteType((yyvsp[(1) - (3)].str), (yyvsp[(3) - (3)].str)); (yyval.str) = "NUM"; ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1689 "syntaxique.tab.c"
+#line 1693 "syntaxique.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1897,11 +1901,11 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 207 "syntaxique.y"
+#line 211 "syntaxique.y"
 
 
 void yyerror(const char *msg) {
-    fprintf(stderr, "Erreur Syntaxique à la ligne %d, colonne %d: %s\n", nb_ligne, nb_colonne, msg);
+    fprintf(stderr, "Erreur Syntaxique à la ligne %d, colonne %d: %s\n", yylineno, nb_colonne, msg);
 }
 
 int main() {

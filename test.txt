@@ -1,5 +1,4 @@
 DEBUT
---Déclaration des variables ##
 NUM : age ;
 REAL : salaire ;
 FIXE NUM : MAX_AGE = 65 ;
